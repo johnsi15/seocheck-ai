@@ -1,9 +1,10 @@
 'use client'
-import { ChangeEventHandler, FormEventHandler, useState } from 'react'
+import { zodResolver } from '@hookform/resolvers/zod'
+// import { ChangeEventHandler, FormEventHandler } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-const SeoSchema = z.object({
+const seoCheckSchema = z.object({
   title: z
     .string()
     .min(55, {
@@ -24,8 +25,12 @@ const SeoSchema = z.object({
     }),
   keyword: z.string().optional(),
 })
+// .refine(data => data.title.length > 0 && data.description.length > 0, {
+//   message: 'Por favor, ingresa un título y una descripción para poder continuar.',
+//   path: ['title'],
+// })
 
-type SeoCheck = z.infer<typeof SeoSchema>
+type SeoCheck = z.infer<typeof seoCheckSchema>
 
 export function FormSeoCheck() {
   const {
@@ -33,18 +38,16 @@ export function FormSeoCheck() {
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
-    getValues,
-  } = useForm<SeoCheck>()
-
-  // const handleChange: ChangeEventHandler<HTMLInputElement> = event => {
-
-  // const handleSubmit: FormEventHandler<HTMLFormElement> = event => {}
+  } = useForm<SeoCheck>({
+    resolver: zodResolver(seoCheckSchema),
+  })
 
   const onSubmit = (data: SeoCheck) => {
     console.log('onsubmit')
     reset()
   }
 
+  console.log({ errors })
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5 w-[700px]'>
       <label htmlFor='title' className='flex flex-col'>
@@ -61,18 +64,7 @@ export function FormSeoCheck() {
               ? 'bg-red-50 border-red-500 text-red-900 focus:border-red:500'
               : 'bg-transparent text-gray-500 focus:border-indigo-600'
           }`}
-          {...register('title', {
-            required: 'El título es requerido',
-            minLength: {
-              value: 55,
-              message:
-                'El título debe tener al menos 55 caracteres para mejorar la visibilidad en motores de búsqueda.',
-            },
-            maxLength: {
-              value: 75,
-              message: 'El título no se recomienda que tenga más de 75 caracteres.',
-            },
-          })}
+          {...register('title')}
         />
         {errors.title && <p className='text-red-900 text-base mt-3'>{errors.title.message}</p>}
       </label>
@@ -90,7 +82,7 @@ export function FormSeoCheck() {
               ? 'bg-red-50 border-red-500 text-red-900 focus:border-red:500'
               : 'bg-transparent text-gray-500 focus:border-indigo-600'
           }`}
-          {...register('description', { required: 'La descripción es requerida' })}
+          {...register('description')}
         />
         {errors.description && <p className='text-red-900 text-base mt-3'>{errors.description.message}</p>}
       </label>
