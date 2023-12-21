@@ -1,36 +1,7 @@
 'use client'
-import { zodResolver } from '@hookform/resolvers/zod'
-// import { ChangeEventHandler, FormEventHandler } from 'react'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-
-const seoCheckSchema = z.object({
-  title: z
-    .string()
-    .min(55, {
-      message: 'El título debe tener al menos 55 caracteres para mejorar la visibilidad en motores de búsqueda.',
-    })
-    .max(75, {
-      message:
-        'El título no se recomienda que tenga más de 75 caracteres para garantizar la efectividad en los resultados de búsqueda.',
-    }),
-  description: z
-    .string()
-    .min(120, {
-      message: 'La descripción debe tener al menos 120 caracteres para mejorar la visibilidad en motores de búsqueda.',
-    })
-    .max(160, {
-      message:
-        'La descripción no se recomienda que tenga más de 160 caracteres para garantizar la efectividad en los resultados de búsqueda.',
-    }),
-  keyword: z.string().optional(),
-})
-// .refine(data => data.title.length > 0 && data.description.length > 0, {
-//   message: 'Por favor, ingresa un título y una descripción para poder continuar.',
-//   path: ['title'],
-// })
-
-type SeoCheck = z.infer<typeof seoCheckSchema>
+import { zodResolver } from '@hookform/resolvers/zod'
+import { SeoCheck, seoCheckSchema } from '@/lib/types'
 
 export function FormSeoCheck() {
   const {
@@ -47,7 +18,6 @@ export function FormSeoCheck() {
     reset()
   }
 
-  console.log({ errors })
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5 w-[700px]'>
       <label htmlFor='title' className='flex flex-col'>
