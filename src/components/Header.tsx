@@ -1,3 +1,5 @@
+import { ButtonModeDark } from './ButtonModeDark'
+
 export function Header() {
   return (
     <header>
@@ -22,6 +24,7 @@ export function Header() {
               ))}
             </div>
           </ul> */}
+        <ButtonModeDark />
       </nav>
     </header>
   )
