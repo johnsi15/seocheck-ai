@@ -12,13 +12,31 @@ export function FormSeoCheck() {
     formState: { errors, isSubmitting, isValid },
     reset,
     getFieldState,
+    setError,
   } = useForm<SeoCheck>({
     resolver: zodResolver(seoCheckSchema),
   })
 
   const onSubmit = (data: SeoCheck) => {
     console.log('onsubmit')
-    console.log({ isValid })
+    console.log({ data })
+    const { title, description, keyword } = data
+    const regex = new RegExp(`\\b${keyword}\\b`, 'i')
+
+    if (keyword && !regex.test(title)) {
+      console.log('ok this includes keyword')
+      setError('title', {
+        type: 'manual',
+        message: `Incluye tu palabra clave (${keyword}) en el título para fortalecer la relevancia de tu contenido. Cuanto más a la izquierda aparezca la palabra clave en el título, mejor. Esto ayuda a Google a saber de qué trata el contenido.`,
+      })
+    }
+
+    if (keyword && !regex.test(description)) {
+      setError('description', {
+        type: 'manual',
+        message: `Incluye tu palabra clave (${keyword}) en la descripción para fortalecer la relevancia de tu contenido. Las meta descripciones no influyen directamente en el posicionamiento, pero pueden animar a los usuarios a hacer clic.`,
+      })
+    }
     // reset()
   }
 
