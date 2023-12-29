@@ -7,16 +7,21 @@ export function FormSeoCheck() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isValid, isValidating },
     reset,
+    getFieldState,
   } = useForm<SeoCheck>({
     resolver: zodResolver(seoCheckSchema),
   })
 
   const onSubmit = (data: SeoCheck) => {
     console.log('onsubmit')
-    reset()
+    console.log({ isValid })
+    // reset()
   }
+
+  const fieldState = getFieldState('title')
+  console.log({ fieldState })
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5 w-[700px]'>
@@ -32,8 +37,8 @@ export function FormSeoCheck() {
           className={`w-full pl-5 pr-3 py-2   outline-none border  shadow-sm rounded-lg ${
             errors.title
               ? 'bg-red-50 border-red-500 text-red-900 focus:border-red:500'
-              : 'bg-transparent text-gray-500 focus:border-indigo-600'
-          }`}
+              : 'bg-transparent text-gray-500 focus:border-indigo-60'
+          } ${isValidating && !errors.title ? 'border-green-500 text-green-900' : ''}`}
           {...register('title')}
         />
         {errors.title && <p className='text-red-900 text-base mt-3'>{errors.title.message}</p>}
@@ -43,17 +48,17 @@ export function FormSeoCheck() {
           Proporciona una descripción detallada de tu contenido. Esto ayudará a los motores de búsqueda y a los usuarios
           a entender de qué se trata tu página.
         </span>
-        <input
+        <textarea
           id='description'
-          type='text'
+          rows={3}
           placeholder='Descripción'
-          className={`w-full pl-5 pr-3 py-2   outline-none border  shadow-sm rounded-lg ${
+          className={`w-full pl-5 pr-3 py-2   outline-none border  shadow-sm rounded-lg resize-none ${
             errors.description
               ? 'bg-red-50 border-red-500 text-red-900 focus:border-red:500'
               : 'bg-transparent text-gray-500 focus:border-indigo-600'
           }`}
           {...register('description')}
-        />
+        ></textarea>
         {errors.description && <p className='text-red-900 text-base mt-3'>{errors.description.message}</p>}
       </label>
       <label htmlFor='keyword' className='flex flex-col'>
