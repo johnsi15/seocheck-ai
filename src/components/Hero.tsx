@@ -26,7 +26,7 @@ export function Hero() {
         </div>
         <div className='mt-12 justify-center items-center space-y-3 sm:space-x-6 sm:space-y-0 sm:flex'>
           <a
-            href='/check-seo'
+            href='/validar-seo'
             className='px-10 py-3.5 w-full bg-indigo-600 text-white text-center rounded-md shadow-md block sm:w-auto'
           >
             Empezar

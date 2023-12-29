@@ -1,7 +1,7 @@
 import { FormSeoCheck } from '@/components/FormSeoCheck'
 import { Header } from '@/components/Header'
 
-export default function Home() {
+export default function CheckSeo() {
   return (
     <>
       <Header />
