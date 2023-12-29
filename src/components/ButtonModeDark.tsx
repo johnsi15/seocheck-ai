@@ -2,10 +2,7 @@
 import { useState, useEffect } from 'react'
 
 export function ButtonModeDark() {
-  const [isDarkTheme, setIsDarkTheme] = useState(
-    // Check for initial theme preference
-    localStorage.getItem('color-theme') === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches
-  )
+  const [isDarkTheme, setIsDarkTheme] = useState(false)
 
   useEffect(() => {
     // Update document body class based on theme
@@ -15,9 +12,16 @@ export function ButtonModeDark() {
     localStorage.setItem('color-theme', isDarkTheme ? 'dark' : 'light')
   }, [isDarkTheme])
 
+  useEffect(() => {
+    const mode =
+      localStorage.getItem('color-theme') === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches
+    setIsDarkTheme(mode)
+  }, [])
+
   const handleToggleTheme = () => {
     setIsDarkTheme(!isDarkTheme)
   }
+
   return (
     <button
       id='theme-toggle'
