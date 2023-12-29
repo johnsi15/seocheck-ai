@@ -19,7 +19,7 @@ export function FormSeoCheck() {
 
   const onSubmit = (data: SeoCheck) => {
     console.log('onsubmit')
-    console.log({ data })
+
     const { title, description, keyword } = data
     const regex = new RegExp(`\\b${keyword}\\b`, 'i')
 
