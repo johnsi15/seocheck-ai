@@ -27,7 +27,7 @@ export function Hero() {
         <div className='mt-12 justify-center items-center space-y-3 sm:space-x-6 sm:space-y-0 sm:flex'>
           <a
             href='/validar-seo'
-            className='px-10 py-3.5 w-full bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 text-center rounded-md shadow-md block sm:w-auto'
+            className='px-10 py-3.5 w-full bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 text-center rounded-md shadow-md block sm:w-auto transition-colors'
           >
             Empezar
           </a>
