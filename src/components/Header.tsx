@@ -1,4 +1,4 @@
-import { ButtonModeDark } from './ButtonModeDark'
+import { ThemeSwitcher } from './ThemeSwitcher'
 
 export function Header() {
   return (
@@ -24,7 +24,7 @@ export function Header() {
               ))}
             </div>
           </ul> */}
-        <ButtonModeDark />
+        <ThemeSwitcher />
       </nav>
     </header>
   )
