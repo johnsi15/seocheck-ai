@@ -1,25 +1,25 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export function ButtonModeDark() {
-  const [isDarkTheme, setIsDarkTheme] = useState(false)
+  const [theme, setTheme] = useState(() => {
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark'
+    }
+
+    return 'light'
+  })
 
   useEffect(() => {
-    // Update document body class based on theme
-    document.documentElement.classList.toggle('dark', isDarkTheme)
-
-    // Persist theme preference in localStorage
-    localStorage.setItem('color-theme', isDarkTheme ? 'dark' : 'light')
-  }, [isDarkTheme])
-
-  useEffect(() => {
-    const mode =
-      localStorage.getItem('color-theme') === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches
-    setIsDarkTheme(mode)
-  }, [])
+    if (theme === 'dark') {
+      document.querySelector('html')?.classList.add('dark')
+    } else {
+      document.querySelector('html')?.classList.remove('dark')
+    }
+  }, [theme])
 
   const handleToggleTheme = () => {
-    setIsDarkTheme(!isDarkTheme)
+    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'))
   }
 
   return (
@@ -27,9 +27,9 @@ export function ButtonModeDark() {
       id='theme-toggle'
       type='button'
       onClick={handleToggleTheme}
-      className='text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5'
+      className='text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5'
     >
-      {isDarkTheme ? (
+      {theme === 'dark' ? (
         <svg
           id='theme-toggle-light-icon'
           className='w-5 h-5'

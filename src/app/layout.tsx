@@ -1,7 +1,5 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import Script from 'next/script'
-import { modeDark } from '@/lib/modeDark'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -14,8 +12,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='es'>
-      <body className={`${inter.className} dark:bg-gray-800`}>{children}</body>
-      <Script id='show-banner'>{`${modeDark()}`}</Script>
+      <body className={`${inter.className} dark:bg-neutral-900`}>{children}</body>
     </html>
   )
 }
