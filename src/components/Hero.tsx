@@ -14,11 +14,11 @@ export function Hero() {
       <Header />
       <section className='mt-24 mx-auto max-w-screen-xl pb-4 px-4 sm:px-8'>
         <div className='text-center space-y-4'>
-          <h1 className='text-gray-800 font-bold text-4xl md:text-5xl'>
+          <h1 className='text-gray-800 font-bold text-4xl md:text-5xl dark:text-slate-200'>
             Potencia la visibilidad de tu
-            <span className='text-indigo-600'> Contenido</span>
+            <span className='dark:text-rose-600 text-rose-700'> Contenido</span>
           </h1>
-          <p className='text-gray-500 max-w-xl mx-auto leading-relaxed'>
+          <p className='text-slate-800 max-w-xl mx-auto leading-relaxed text-base dark:text-slate-200'>
             Descubre el poder de SEO CheckAI para impulsar la visibilidad de tu contenido en línea. Nuestra herramienta
             avanzada de auditoría SEO, respaldada por inteligencia artificial, te ayuda a optimizar tu presencia en los
             motores de búsqueda. Aumenta tu posicionamiento y atrae a más usuarios con una estrategia SEO efectiva.
@@ -27,7 +27,7 @@ export function Hero() {
         <div className='mt-12 justify-center items-center space-y-3 sm:space-x-6 sm:space-y-0 sm:flex'>
           <a
             href='/validar-seo'
-            className='px-10 py-3.5 w-full bg-indigo-600 text-white text-center rounded-md shadow-md block sm:w-auto'
+            className='px-10 py-3.5 w-full bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 text-center rounded-md shadow-md block sm:w-auto'
           >
             Empezar
           </a>

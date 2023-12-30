@@ -4,7 +4,7 @@ import { useTheme } from 'next-themes'
 
 export function ThemeSwitcher() {
   const [mounted, setMounted] = useState(false)
-  const { theme, setTheme, themes, resolvedTheme } = useTheme()
+  const { theme, setTheme, resolvedTheme } = useTheme()
 
   useEffect(() => {
     setMounted(true)
@@ -14,11 +14,8 @@ export function ThemeSwitcher() {
     return null
   }
 
-  console.log({ theme, themes, resolvedTheme })
-
   const handleToggleTheme = () => {
     const toggleTheme = resolvedTheme === 'light' ? 'dark' : 'light'
-    // setTheme('light')
     setTheme(toggleTheme)
   }
 
