@@ -13,6 +13,7 @@ export function FormSeoCheck() {
     reset,
     getFieldState,
     setError,
+    getValues,
   } = useForm<SeoCheck>({
     resolver: zodResolver(seoCheckSchema),
   })
@@ -38,6 +39,8 @@ export function FormSeoCheck() {
       })
     }
     // reset()
+
+    return
   }
 
   return (
@@ -70,7 +73,12 @@ export function FormSeoCheck() {
             </div>
           )}
         </div>
-        {errors.title && <p className='text-red-600 text-base mt-3'>{errors.title.message}</p>}
+        {errors.title && (
+          <>
+            <p className='text-red-600 text-base mt-3'>{errors.title.message}</p>
+            <p className='font-semibold italic text-red-600'>Tu título tiene {getValues('title').length} caracteres.</p>
+          </>
+        )}
       </label>
       <label htmlFor='description' className='flex flex-col'>
         <span className='mb-2 text-lg text-slate-800 dark:text-slate-200 font-semibold'>
@@ -103,13 +111,20 @@ export function FormSeoCheck() {
             </div>
           )}
         </div>
-        {errors.description && <p className='text-red-600 text-base mt-3'>{errors.description.message}</p>}
+        {errors.description && (
+          <>
+            <p className='text-red-600 text-base mt-3'>{errors.description.message}</p>
+            <p className='font-semibold italic text-red-600'>
+              Tu descripción tiene {getValues('description').length} caracteres.
+            </p>
+          </>
+        )}
       </label>
       <label htmlFor='keyword' className='flex flex-col'>
         <span className='mb-2 text-lg text-slate-800 dark:text-slate-200 font-semibold'>
           Si tienes una palabra clave específica que quieras destacar, introdúcela aquí. Esto puede mejorar aún más la
           optimización para motores de búsqueda.
-          <strong className='text-cyan-700 dark:text-cyan-500 font-semibold'>(opcional)</strong>
+          <strong className='text-cyan-700 dark:text-cyan-500 font-semibold'> (opcional)</strong>
         </span>
         <input
           id='keyword'
@@ -126,6 +141,21 @@ export function FormSeoCheck() {
       >
         Validar SEO
       </button>
+      {(errors.title || errors.description) && (
+        <p className='text-lg dark:text-slate-200 w-[700px]'>
+          Ten en cuenta que las recomendaciones para escribir los títulos y descripciones no son reglas estrictas en
+          cuanto a la cantidad de caracteres, pero sí constituyen un sólido punto de partida para optimizar el SEO de
+          nuestros artículos. Siguiendo estas sugerencias, podemos mejorar la visibilidad y la efectividad de nuestro
+          contenido en los motores de búsqueda.
+        </p>
+      )}
+      {isValid && (
+        <p className='text-lg dark:text-slate-200 '>
+          Tus datos han superado exitosamente la validación del SEO y están óptimamente optimizados para destacar en los
+          motores de búsqueda.
+          <span className='ml-1 font-semibold dark:text-green-500 text-green-700'>¡Excelente trabajo!</span>
+        </p>
+      )}
     </form>
   )
 }

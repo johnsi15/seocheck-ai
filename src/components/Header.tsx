@@ -2,8 +2,8 @@ import { ThemeSwitcher } from './ThemeSwitcher'
 
 export function Header() {
   return (
-    <header>
-      <nav className='items-center pt-5 px-4 mx-auto max-w-screen-xl sm:px-8 md:flex md:space-x-6'>
+    <header className='h-max'>
+      <nav className='items-center pt-5 px-4 mx-auto max-w-screen-xl sm:px-8 md:flex md:space-x-6 h-14'>
         <div className='flex justify-between'>
           <a href='/'>SEO CheckAI</a>
         </div>

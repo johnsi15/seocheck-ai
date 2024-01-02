@@ -8,7 +8,7 @@ export const seoCheckSchema = z.object({
     })
     .max(75, {
       message:
-        'El título no se recomienda que tenga más de 75 caracteres para garantizar la efectividad en los resultados de búsqueda.',
+        'El título no se recomienda que tenga más de 80 caracteres para garantizar la efectividad en los resultados de búsqueda.',
     }),
   description: z
     .string()

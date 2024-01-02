@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Lato } from 'next/font/google'
 import './globals.css'
 import { ThemeProviders } from '@/components/ThemeProviders'
 
-const inter = Inter({ subsets: ['latin'] })
+const lato = Lato({ weight: ['300', '400', '700', '900'], subsets: ['latin'], display: 'swap' })
 
 export const metadata: Metadata = {
   title: 'SEO CheckAI Potencia la visibilidad de tu contenido',
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='es'>
-      <body className={`${inter.className} bg-slate-100 dark:bg-slate-900`}>
+      <body className={`${lato.className} bg-slate-100 dark:bg-slate-900`}>
         <ThemeProviders attribute='class' storageKey='theme' defaultTheme='system' enableSystem>
           {children}
         </ThemeProviders>

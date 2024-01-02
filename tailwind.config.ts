@@ -8,6 +8,12 @@ const config: Config = {
   ],
   theme: {
     extend: {},
+    fontWeight: {
+      light: '300',
+      normal: '400',
+      semibold: '700',
+      bold: '900',
+    },
   },
   plugins: [],
   darkMode: 'class',
