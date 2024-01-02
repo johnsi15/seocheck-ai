@@ -144,9 +144,11 @@ export function FormSeoCheck() {
       {(errors.title || errors.description) && (
         <p className='text-lg dark:text-slate-200 w-[700px]'>
           Ten en cuenta que las recomendaciones para escribir los títulos y descripciones no son reglas estrictas en
-          cuanto a la cantidad de caracteres, pero sí constituyen un sólido punto de partida para optimizar el SEO de
-          nuestros artículos. Siguiendo estas sugerencias, podemos mejorar la visibilidad y la efectividad de nuestro
-          contenido en los motores de búsqueda.
+          cuanto a la <strong className='dark:text-rose-600 text-rose-700'>cantidad de caracteres</strong>, pero sí
+          constituyen un sólido punto de partida para{' '}
+          <strong className='dark:text-rose-600 text-rose-700'>optimizar el SEO de nuestros artículos</strong>.
+          Siguiendo estas sugerencias, podemos mejorar la visibilidad y la efectividad de nuestro contenido en los
+          motores de búsqueda.
         </p>
       )}
       {isValid && (
