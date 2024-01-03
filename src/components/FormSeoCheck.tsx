@@ -46,7 +46,7 @@ export function FormSeoCheck() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5 w-[700px]'>
       <label htmlFor='title' className='flex flex-col'>
-        <span className='mb-2 text-lg text-slate-800 dark:text-slate-200 font-semibold'>
+        <span className='mb-2 text-lg text-slate-800 dark:text-slate-200 font-semibold text-balance'>
           Ingresa un título descriptivo para tu contenido, asegúrate de que sea claro y relevante para mejorar la
           visibilidad en los motores de búsqueda.
         </span>
@@ -81,7 +81,7 @@ export function FormSeoCheck() {
         )}
       </label>
       <label htmlFor='description' className='flex flex-col'>
-        <span className='mb-2 text-lg text-slate-800 dark:text-slate-200 font-semibold'>
+        <span className='mb-2 text-lg text-slate-800 dark:text-slate-200 font-semibold text-balance'>
           Proporciona una descripción detallada de tu contenido, esto ayudará a los motores de búsqueda y a los usuarios
           a entender de qué se trata tu página.
         </span>
@@ -121,7 +121,7 @@ export function FormSeoCheck() {
         )}
       </label>
       <label htmlFor='keyword' className='flex flex-col'>
-        <span className='mb-2 text-lg text-slate-800 dark:text-slate-200 font-semibold'>
+        <span className='mb-2 text-lg text-slate-800 dark:text-slate-200 font-semibold text-balance'>
           Si tienes una palabra clave específica que quieras destacar, introdúcela aquí. Esto puede mejorar aún más la
           optimización para motores de búsqueda.
           <strong className='text-cyan-700 dark:text-cyan-500 font-semibold'> (opcional)</strong>
@@ -142,7 +142,7 @@ export function FormSeoCheck() {
         Validar SEO
       </button>
       {(errors.title || errors.description) && (
-        <p className='text-lg dark:text-slate-200 w-[700px]'>
+        <p className='text-lg dark:text-slate-200 w-[700px] text-pretty'>
           Ten en cuenta que las recomendaciones para escribir los títulos y descripciones no son reglas estrictas en
           cuanto a la <strong className='dark:text-rose-600 text-rose-700'>cantidad de caracteres</strong>, pero sí
           constituyen un sólido punto de partida para{' '}
@@ -152,7 +152,7 @@ export function FormSeoCheck() {
         </p>
       )}
       {isValid && (
-        <p className='text-lg dark:text-slate-200 '>
+        <p className='text-lg dark:text-slate-200 text-pretty'>
           Tus datos han superado exitosamente la validación del SEO y están óptimamente optimizados para destacar en los
           motores de búsqueda.
           <span className='ml-1 font-semibold dark:text-green-500 text-green-700'>¡Excelente trabajo!</span>
