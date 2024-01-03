@@ -43,6 +43,8 @@ export function FormSeoCheck() {
     return
   }
 
+  console.log(getFieldState('title'))
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5 w-[700px]'>
       <label htmlFor='title' className='flex flex-col'>
@@ -55,11 +57,13 @@ export function FormSeoCheck() {
             id='title'
             type='text'
             placeholder='Título'
-            className={`w-full pl-5 pr-3 py-2   outline-none border  shadow-sm rounded-lg ${
+            className={`w-full pl-5 pr-3 py-2 outline-none border shadow-sm rounded-lg ${
               errors.title
                 ? 'bg-red-50 border-red-500 text-red-800 focus:border-red:500 dark:bg-red-100'
+                : !getFieldState('title').invalid && getFieldState('title').isDirty
+                ? 'bg-transparent text-slate-800 dark:text-slate-300 border-green-500'
                 : 'bg-transparent text-slate-800 dark:text-slate-300 focus:border-blue-600 border-slate-500'
-            } ${!getFieldState('title').invalid && getFieldState('title').isDirty ? 'border-green-500' : ''}`}
+            }`}
             {...register('title')}
           />
           {getFieldState('title').isDirty && !getFieldState('title').invalid && (
@@ -93,9 +97,9 @@ export function FormSeoCheck() {
             className={`w-full pl-5 pr-3 py-2   outline-none border  shadow-sm rounded-lg resize-none ${
               errors.description
                 ? 'bg-red-50 border-red-500 text-red-800 focus:border-red:500 dark:bg-red-100'
+                : !getFieldState('description').invalid && getFieldState('description').isDirty
+                ? 'bg-transparent text-slate-800 dark:text-slate-300 border-green-500'
                 : 'bg-transparent text-slate-800 dark:text-slate-300 focus:border-blue-600 border-slate-500'
-            } ${
-              !getFieldState('description').invalid && getFieldState('description').isDirty ? 'border-green-500' : ''
             }`}
             {...register('description')}
           ></textarea>
@@ -137,7 +141,7 @@ export function FormSeoCheck() {
       <button
         disabled={isSubmitting}
         type='submit'
-        className='px-6 py-3.5  rounded-lg duration-150 bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 active:shadow-lg'
+        className='px-6 py-3.5  rounded-lg duration-150 bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 active:shadow-lg w-2/6'
       >
         Validar SEO
       </button>
@@ -147,8 +151,10 @@ export function FormSeoCheck() {
           cuanto a la <strong className='dark:text-rose-600 text-rose-700'>cantidad de caracteres</strong>, pero sí
           constituyen un sólido punto de partida para{' '}
           <strong className='dark:text-rose-600 text-rose-700'>optimizar el SEO de nuestros artículos</strong>.
-          Siguiendo estas sugerencias, podemos mejorar la visibilidad y la efectividad de nuestro contenido en los
-          motores de búsqueda.
+          <span className='block mt-3'>
+            Siguiendo estas sugerencias, podemos mejorar la visibilidad y la efectividad de nuestro contenido en los
+            motores de búsqueda.
+          </span>
         </p>
       )}
       {isValid && (

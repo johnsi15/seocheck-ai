@@ -6,7 +6,7 @@ export const seoCheckSchema = z.object({
     .min(55, {
       message: 'El título debe tener al menos 55 caracteres para mejorar la visibilidad en motores de búsqueda.',
     })
-    .max(75, {
+    .max(80, {
       message:
         'El título no se recomienda que tenga más de 80 caracteres para garantizar la efectividad en los resultados de búsqueda.',
     }),
