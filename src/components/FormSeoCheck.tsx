@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { SeoCheck, seoCheckSchema } from '@/lib/types'
 import { IconSuccess } from './IconSuccess'
 import { IconError } from './IconError'
+import { Errors } from './Errors'
 
 export function FormSeoCheck() {
   const {
@@ -43,7 +44,7 @@ export function FormSeoCheck() {
     return
   }
 
-  console.log(getFieldState('title'))
+  const success = getFieldState('title').isDirty && !getFieldState('title').invalid
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5 w-[700px]'>
@@ -66,16 +67,9 @@ export function FormSeoCheck() {
             }`}
             {...register('title')}
           />
-          {getFieldState('title').isDirty && !getFieldState('title').invalid && (
-            <div className='absolute inset-y-0 -end-10 flex items-center ps-3 pointer-events-none'>
-              <IconSuccess />
-            </div>
-          )}
-          {errors.title && (
-            <div className='absolute inset-y-0 -end-10 flex items-center ps-3 pointer-events-none'>
-              <IconError />
-            </div>
-          )}
+
+          <Errors success={success} errors={false} />
+          <Errors success={false} errors={errors.title ? true : false} />
         </div>
         {errors.title && (
           <>
