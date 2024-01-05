@@ -50,7 +50,7 @@ async function suggestions({ title, description, keywords }: SeoData) {
       {
         role: 'assistant',
         content: `Título: De la ilusión a la angustia: El ‘Sueño Americano’ de una familia cucuteña \n
-          Descripción: Familia cucuteña vive angustia en travesía a EE. UU. Padres ruegan ayuda para rescatar seres queridos secuestrados en odisea del ‘Sueño Americano’.`,
+          Descripción: Familia cucuteña vive angustia en travesía a EE. UU. Padres ruegan ayuda para rescatar seres queridos secuestrados en odisea del ‘Sueño Americano’. \n Palabra Clave: familia cucuteña`,
       },
       {
         role: 'user',
@@ -59,8 +59,6 @@ async function suggestions({ title, description, keywords }: SeoData) {
     ],
     stream: true,
   })
-
-  // 'You are a helpful assistant that provides SEO suggestions. The goal is to optimize the title and description for search engines. Titles should be between 55 and 80 characters, and descriptions should be between 120 and 160 characters. If a keyword or keywords are provided, ensure that it appears in both the title and description. The answer must be in Spanish.'
 
   const stream = OpenAIStream(response)
   console.log({ stream })

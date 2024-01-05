@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { SeoCheck, seoCheckSchema } from '@/lib/types'
 import { IconSuccess } from './IconSuccess'
 import { IconError } from './IconError'
-import { Errors } from './Errors'
+import { ErrorsSuccess } from './ErrorsSuccess'
 
 export function FormSeoCheck() {
   const {
@@ -44,7 +44,8 @@ export function FormSeoCheck() {
     return
   }
 
-  const success = getFieldState('title').isDirty && !getFieldState('title').invalid
+  const successTitle = getFieldState('title').isDirty && !getFieldState('title').invalid
+  const successDescription = getFieldState('description').isDirty && !getFieldState('description').invalid
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5 w-[700px]'>
@@ -68,8 +69,7 @@ export function FormSeoCheck() {
             {...register('title')}
           />
 
-          <Errors success={success} errors={false} />
-          <Errors success={false} errors={errors.title ? true : false} />
+          <ErrorsSuccess success={successTitle} errors={errors.title ? true : false} />
         </div>
         {errors.title && (
           <>
@@ -98,16 +98,7 @@ export function FormSeoCheck() {
             {...register('description')}
           ></textarea>
 
-          {getFieldState('description').isDirty && !getFieldState('description').invalid && (
-            <div className='absolute inset-y-0 -end-10 flex items-center ps-3 pointer-events-none'>
-              <IconSuccess />
-            </div>
-          )}
-          {errors.description && (
-            <div className='absolute inset-y-0 -end-10 flex items-center ps-3 pointer-events-none'>
-              <IconError />
-            </div>
-          )}
+          <ErrorsSuccess success={successDescription} errors={errors.description ? true : false} />
         </div>
         {errors.description && (
           <>
