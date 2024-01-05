@@ -4,6 +4,14 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { SeoCheck, seoCheckSchema } from '@/lib/types'
 import { ErrorsSuccess } from './ErrorsSuccess'
 import { Suggestions } from './Suggestions'
+import { useState } from 'react'
+import { type DataSeoAI } from '../types'
+
+const initialDataSeoAI: DataSeoAI = {
+  title: '',
+  description: '',
+  active: false,
+}
 
 export function FormSeoCheck() {
   const {
@@ -17,6 +25,8 @@ export function FormSeoCheck() {
   } = useForm<SeoCheck>({
     resolver: zodResolver(seoCheckSchema),
   })
+
+  const [suggestionsIa, setSuggestionsIa] = useState(initialDataSeoAI)
 
   const onSubmit = (data: SeoCheck) => {
     console.log('onsubmit')
@@ -48,16 +58,25 @@ export function FormSeoCheck() {
   const title = getValues('title')
   const description = getValues('description')
 
-  const validAI = !title || !description || isSubmitting || title.length < 55 || description.length < 120
+  const validButtonAI = !title || !description || isSubmitting || title.length < 55 || description.length < 120
 
   const handleSuggestionsAI = () => {
-    console.log('onClick')
+    const title = getValues('title')
+    const description = getValues('description')
+    const keyword = getValues('keyword')
+
     console.log({ title })
+    setSuggestionsIa({
+      title,
+      description,
+      keyword,
+      active: true,
+    })
   }
 
   return (
     <>
-      <Suggestions title={title} description={description} validSuggestions={validAI} />
+      <Suggestions data={suggestionsIa} />
 
       <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5 w-[700px]'>
         <label htmlFor='title' className='flex flex-col'>
@@ -143,7 +162,7 @@ export function FormSeoCheck() {
           </button>
 
           <button
-            disabled={validAI}
+            disabled={validButtonAI}
             type='button'
             onClick={handleSuggestionsAI}
             className='px-6 py-3.5  rounded-lg duration-150 bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 active:shadow-lg w-2/4 disabled:opacity-75 disabled:cursor-not-allowed disabled:bg-rose-700'
@@ -164,7 +183,7 @@ export function FormSeoCheck() {
               Siguiendo estas sugerencias, podemos mejorar la visibilidad y la efectividad de nuestro contenido en los
               motores de búsqueda.
             </p>
-            {validAI && (
+            {validButtonAI && (
               <p className='mt-3'>
                 Para recibir <strong className='dark:text-rose-600 text-rose-700'>sugerencias</strong> a través de
                 inteligencia artificial <strong className='dark:text-rose-600 text-rose-700'>(AI)</strong>, es necesario
