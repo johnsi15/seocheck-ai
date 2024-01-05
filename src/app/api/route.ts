@@ -13,6 +13,7 @@ const openai = new OpenAI({
 
 async function suggestions({ title, description, keywords }: SeoData) {
   console.log({ title, description, keywords })
+  // valid title, description y keywords con regex
 
   const response = await openai.chat.completions.create({
     model: 'gpt-3.5-turbo',
