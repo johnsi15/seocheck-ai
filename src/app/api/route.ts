@@ -16,23 +16,51 @@ async function suggestions({ title, description, keywords }: SeoData) {
 
   const response = await openai.chat.completions.create({
     model: 'gpt-3.5-turbo',
-    stream: true,
     messages: [
       {
         role: 'system',
         content:
-          'You are a helpful assistant that provides SEO suggestions. The goal is to optimize the title and description for search engines. Titles should be between 55 and 80 characters, and descriptions should be between 120 and 160 characters.',
+          'You are a helpful assistant that provides SEO suggestions. The goal is to optimize the title and description for search engines. Titles should be between 55 and 80 characters, and descriptions should be between 120 and 160 characters. The answer must be in Spanish.',
       },
       {
         role: 'user',
-        content: `Title: ${title}\nDescription: ${description}\n ${
-          keywords.length > 0 ? `Keywords: ${keywords.join(',')}` : ''
-        }`,
+        content: `Title: De la ilusión a la angustia: El ‘sueño americano’ convertido en pesadilla para una familia cucuteña \n 
+          Description: Padres cucuteños ruegan ayuda para rescatar a su familia secuestrada en su ruta a los Estados Unidos.`,
+      },
+      {
+        role: 'assistant',
+        content: `Título: De la ilusión a la angustia: El ‘sueño americano’ de una familia cucuteña \n 
+          Descripción: Familia cucuteña vive angustia en travesía a EE. UU. Padres ruegan ayuda para rescatar seres queridos secuestrados en odisea del ‘sueño americano’.`,
+      },
+      {
+        role: 'user',
+        content: `Title: De la ilusión a la angustia: El ‘sueño americano’ convertido en pesadilla para una familia cucuteña \n 
+          Description: Padres cucuteños ruegan ayuda para rescatar a su familia secuestrada en su ruta a los Estados Unidos.`,
+      },
+      {
+        role: 'assistant',
+        content: `Título: Pesadilla en ruta: Familia cucuteña ruega ayuda para rescatar a seres queridos \n 
+          Descripción: Esperanza de familia cucuteña se torna desesperación. Padres ruegan asistencia para liberar seres queridos secuestrados en peligrosa ruta hacia Estados Unidos.`,
+      },
+      {
+        role: 'user',
+        content: `Title: De la ilusión a la angustia: El ‘sueño americano’ convertido en pesadilla para una familia cucuteña \n 
+          Description: Padres cucuteños ruegan ayuda para rescatar a su familia secuestrada en su ruta a los Estados Unidos. \n Keywords: familia cucuteña`,
+      },
+      {
+        role: 'assistant',
+        content: `Título: De la ilusión a la angustia: El ‘Sueño Americano’ de una familia cucuteña \n
+          Descripción: Familia cucuteña vive angustia en travesía a EE. UU. Padres ruegan ayuda para rescatar seres queridos secuestrados en odisea del ‘Sueño Americano’.`,
+      },
+      {
+        role: 'user',
+        content: `Title: ${title}\nDescription: ${description}\n ${keywords.length > 0 ? `Keywords: ${keywords}` : ''}`,
       },
     ],
+    stream: true,
   })
 
-  // 'You are a helpful assistant that provides SEO suggestions. The goal is to optimize the title and description for search engines. Titles should be between 55 and 80 characters, and descriptions should be between 120 and 160 characters. If a keyword or keywords are provided, ensure that it appears in both the title and description.'
+  // 'You are a helpful assistant that provides SEO suggestions. The goal is to optimize the title and description for search engines. Titles should be between 55 and 80 characters, and descriptions should be between 120 and 160 characters. If a keyword or keywords are provided, ensure that it appears in both the title and description. The answer must be in Spanish.'
 
   const stream = OpenAIStream(response)
   console.log({ stream })
@@ -54,7 +82,7 @@ export async function GET() {
 
 export async function POST(req: Request) {
   const { title, description, keyword } = await req.json()
-  const keywords = keyword?.split(' ') ?? []
+  const keywords = keyword ?? ''
 
   const stream = await suggestions({ title, description, keywords })
 
