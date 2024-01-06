@@ -4,14 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { SeoCheck, seoCheckSchema } from '@/lib/types'
 import { ErrorsSuccess } from './ErrorsSuccess'
 import { Suggestions } from './Suggestions'
-import { useState } from 'react'
-import { type DataSeoAI } from '../types'
-
-const initialDataSeoAI: DataSeoAI = {
-  title: '',
-  description: '',
-  active: false,
-}
+import { useDataSeoAi } from '@/hooks/useDataSeoAi'
 
 export function FormSeoCheck() {
   const {
@@ -26,7 +19,7 @@ export function FormSeoCheck() {
     resolver: zodResolver(seoCheckSchema),
   })
 
-  const [suggestionsIa, setSuggestionsIa] = useState(initialDataSeoAI)
+  const { handleSuggestionsAI, suggestionsIa } = useDataSeoAi({ getValues })
 
   const onSubmit = (data: SeoCheck) => {
     console.log('onsubmit')
@@ -59,20 +52,6 @@ export function FormSeoCheck() {
   const description = getValues('description')
 
   const validButtonAI = !title || !description || isSubmitting || title.length < 55 || description.length < 120
-
-  const handleSuggestionsAI = () => {
-    const title = getValues('title')
-    const description = getValues('description')
-    const keyword = getValues('keyword')
-
-    console.log({ title })
-    setSuggestionsIa({
-      title,
-      description,
-      keyword,
-      active: true,
-    })
-  }
 
   return (
     <>

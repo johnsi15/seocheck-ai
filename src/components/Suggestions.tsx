@@ -7,6 +7,7 @@ interface Props {
 export function Suggestions({ data: { title, description, keyword, active } }: Props) {
   return (
     <section
+      id='suggestions'
       className={`
         overflow-hidden transition-[max-height] duration-500 ease-in 
        ${active ? 'max-h-96' : 'max-h-0'}
