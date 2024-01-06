@@ -1,10 +1,16 @@
 import { type DataSeoAI } from '@/types'
+import { IconCopy } from './IconCopy'
 
 interface Props {
   data: DataSeoAI
 }
 
 export function Suggestions({ data: { title, description, keyword, active } }: Props) {
+  const handleClipBoard = () => {
+    navigator.clipboard.writeText(title)
+    console.log('Copiado')
+    return false
+  }
   return (
     <section
       id='suggestions'
@@ -18,12 +24,23 @@ export function Suggestions({ data: { title, description, keyword, active } }: P
           Sugerencias de título y descripción generadas con inteligencia artificial{' '}
           <strong className='dark:text-rose-600 text-rose-700'>(AI)</strong>
         </h2>
-        <textarea
-          disabled
-          rows={2}
-          value={title}
-          className={`w-full pl-5 pr-3 py-2   outline-none border  shadow-sm rounded-lg resize-none bg-transparent text-slate-200 dark:text-slate-300  border-blue-500`}
-        ></textarea>
+        <div className='relative'>
+          <textarea
+            disabled
+            rows={2}
+            value={title}
+            className={`w-full pl-5 pr-3 py-2   outline-none border  shadow-sm rounded-lg resize-none bg-transparent text-slate-200 dark:text-slate-300  border-blue-500`}
+          ></textarea>
+          <button
+            className='absolute bottom-2 right-2 z-10'
+            title='Copiar'
+            type='button'
+            aria-label='Copiar'
+            onClick={handleClipBoard}
+          >
+            <IconCopy color='#fff' />
+          </button>
+        </div>
         <textarea
           disabled
           rows={3}
