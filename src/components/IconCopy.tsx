@@ -7,6 +7,7 @@ export function IconCopy({ color = 'currentColor', ...props }: { color: string }
       height='24'
       viewBox='0 0 24 24'
       width='24'
+      {...props}
     >
       <g>
         <rect fill='none' height='24' width='24'></rect>

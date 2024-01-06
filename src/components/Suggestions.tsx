@@ -32,13 +32,13 @@ export function Suggestions({ data: { title, description, keyword, active } }: P
             className={`w-full pl-5 pr-3 py-2   outline-none border  shadow-sm rounded-lg resize-none bg-transparent text-slate-200 dark:text-slate-300  border-blue-500`}
           ></textarea>
           <button
-            className='absolute bottom-2 right-2 z-10'
+            className='absolute bottom-3 right-2 z-10 active:scale-50 transition-all hover:opacity-80'
             title='Copiar'
             type='button'
             aria-label='Copiar'
             onClick={handleClipBoard}
           >
-            <IconCopy color='#fff' />
+            <IconCopy color='#e2e8f0' />
           </button>
         </div>
         <textarea
