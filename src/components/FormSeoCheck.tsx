@@ -2,7 +2,7 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SeoCheck, seoCheckSchema } from '@/lib/types'
-import { ErrorsSuccess } from './ErrorsSuccess'
+import { ErrorsMessage, ErrorsSuccess } from './ErrorsSuccess'
 import { Suggestions } from './Suggestions'
 import { useDataSeoAi } from '@/hooks/useDataSeoAi'
 
@@ -41,7 +41,6 @@ export function FormSeoCheck() {
       })
     }
     // reset()
-
     return
   }
 
@@ -81,10 +80,7 @@ export function FormSeoCheck() {
             <ErrorsSuccess success={successTitle} errors={errors.title ? true : false} />
           </div>
           {errors.title && (
-            <>
-              <p className='text-red-600 text-base mt-3'>{errors.title.message}</p>
-              <p className='font-semibold italic text-red-600'>Tu título tiene {title.length} caracteres.</p>
-            </>
+            <ErrorsMessage message={errors.title.message}>Tu título tiene {title.length} caracteres.</ErrorsMessage>
           )}
         </label>
         <label htmlFor='description' className='flex flex-col'>
@@ -110,10 +106,9 @@ export function FormSeoCheck() {
             <ErrorsSuccess success={successDescription} errors={errors.description ? true : false} />
           </div>
           {errors.description && (
-            <>
-              <p className='text-red-600 text-base mt-3'>{errors.description.message}</p>
-              <p className='font-semibold italic text-red-600'>Tu descripción tiene {description.length} caracteres.</p>
-            </>
+            <ErrorsMessage message={errors.description.message}>
+              Tu descripción tiene {description.length} caracteres.
+            </ErrorsMessage>
           )}
         </label>
         <label htmlFor='keyword' className='flex flex-col'>
