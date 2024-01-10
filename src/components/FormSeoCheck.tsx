@@ -10,7 +10,7 @@ export function FormSeoCheck() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isValid },
+    formState: { errors, isSubmitting, isValid, isSubmitSuccessful },
     reset,
     getFieldState,
     setError,
@@ -136,7 +136,7 @@ export function FormSeoCheck() {
           </button>
 
           <button
-            disabled={validButtonAI}
+            disabled={validButtonAI || !isSubmitSuccessful}
             type='button'
             onClick={handleSuggestionsAI}
             className='px-6 py-3.5  rounded-lg duration-150 bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 active:shadow-lg w-2/4 disabled:opacity-75 disabled:cursor-not-allowed disabled:bg-rose-700'
@@ -167,7 +167,7 @@ export function FormSeoCheck() {
             )}
           </article>
         )}
-        {isValid && (
+        {isValid && isSubmitSuccessful && (
           <p className='text-lg dark:text-slate-200 text-pretty'>
             Tus datos han superado exitosamente la validación del SEO y están óptimamente optimizados para destacar en
             los motores de búsqueda.
