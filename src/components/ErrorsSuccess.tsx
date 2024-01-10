@@ -1,5 +1,4 @@
-import { IconError } from './IconError'
-import { IconSuccess } from './IconSuccess'
+import { IconError, IconSuccess } from './Icons'
 
 interface Props {
   success: boolean

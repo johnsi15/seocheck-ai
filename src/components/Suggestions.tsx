@@ -1,5 +1,5 @@
 import { type DataSeoAI } from '@/types'
-import { IconCopy } from './IconCopy'
+import { IconCopy } from './Icons'
 
 interface Props {
   data: DataSeoAI

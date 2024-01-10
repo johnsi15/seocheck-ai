@@ -133,7 +133,7 @@ export function FormSeoCheck() {
 
         <div className='flex gap-3'>
           <button
-            disabled={isSubmitting || isValid}
+            disabled={isSubmitting}
             type='submit'
             className='px-6 py-3.5  rounded-lg duration-150 bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 active:shadow-lg w-2/6 disabled:opacity-75 disabled:cursor-not-allowed disabled:bg-rose-700'
           >
