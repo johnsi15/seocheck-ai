@@ -5,6 +5,7 @@ import { SeoCheck, seoCheckSchema } from '@/lib/types'
 import { ErrorsMessage, ErrorsSuccess } from './ErrorsSuccess'
 import { Suggestions } from './Suggestions'
 import { useDataSeoAi } from '@/hooks/useDataSeoAi'
+import { error } from 'console'
 
 export function FormSeoCheck() {
   const {
@@ -19,7 +20,7 @@ export function FormSeoCheck() {
     resolver: zodResolver(seoCheckSchema),
   })
 
-  const { handleSuggestionsAI, suggestionsIa } = useDataSeoAi({ getValues })
+  const { handleSuggestionsAI, suggestionsIa, errorAI } = useDataSeoAi()
 
   const onSubmit = (data: SeoCheck) => {
     console.log('onsubmit')
@@ -49,12 +50,22 @@ export function FormSeoCheck() {
 
   const title = getValues('title')
   const description = getValues('description')
+  const keyword = getValues('keyword')
 
   const validButtonAI = !title || !description || isSubmitting || title.length < 55 || description.length < 120
 
   return (
     <>
-      <Suggestions data={suggestionsIa} />
+      {!errorAI ? (
+        <Suggestions data={suggestionsIa} />
+      ) : (
+        <p className='text-lg dark:text-slate-200 text-pretty w-[700px] mb-5'>
+          Oops, algo salió mal con las sugerencias que utilizan inteligencia artificial.{' '}
+          <strong className='dark:text-rose-600 text-rose-700'>
+            Por favor, inténtalo de nuevo más tarde. Es posible que tu crédito se haya agotado.
+          </strong>
+        </p>
+      )}
 
       <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5 w-[700px]'>
         <label htmlFor='title' className='flex flex-col'>
@@ -136,9 +147,9 @@ export function FormSeoCheck() {
           </button>
 
           <button
-            disabled={validButtonAI || !isSubmitSuccessful}
+            disabled={validButtonAI || !isSubmitSuccessful || errorAI}
             type='button'
-            onClick={handleSuggestionsAI}
+            onClick={handleSuggestionsAI({ title, description, keyword })}
             className='px-6 py-3.5  rounded-lg duration-150 bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 active:shadow-lg w-2/4 disabled:opacity-75 disabled:cursor-not-allowed disabled:bg-rose-700'
           >
             Generar sugerencias con AI
