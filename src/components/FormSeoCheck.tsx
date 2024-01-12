@@ -5,7 +5,7 @@ import { SeoCheck, seoCheckSchema } from '@/lib/types'
 import { ErrorsMessage, ErrorsSuccess } from './ErrorsSuccess'
 import { Suggestions } from './Suggestions'
 import { useDataSeoAi } from '@/hooks/useDataSeoAi'
-import { error } from 'console'
+import { Loading } from './Loading'
 
 export function FormSeoCheck() {
   const {
@@ -20,7 +20,7 @@ export function FormSeoCheck() {
     resolver: zodResolver(seoCheckSchema),
   })
 
-  const { handleSuggestionsAI, suggestionsIa, errorAI } = useDataSeoAi()
+  const { handleSuggestionsAI, suggestionsIa, errorAI, loading } = useDataSeoAi()
 
   const onSubmit = (data: SeoCheck) => {
     console.log('onsubmit')
@@ -60,12 +60,14 @@ export function FormSeoCheck() {
         <Suggestions data={suggestionsIa} />
       ) : (
         <p className='text-lg dark:text-slate-200 text-pretty w-[700px] mb-5'>
-          Oops, algo salió mal con las sugerencias que utilizan inteligencia artificial.{' '}
+          Oops, algo salió mal al tratar de generar las sugerencias con inteligencia artificial.{' '}
           <strong className='dark:text-rose-600 text-rose-700'>
             Por favor, inténtalo de nuevo más tarde. Es posible que tu crédito se haya agotado.
           </strong>
         </p>
       )}
+
+      {loading && <Loading />}
 
       <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5 w-[700px]'>
         <label htmlFor='title' className='flex flex-col'>
@@ -147,7 +149,7 @@ export function FormSeoCheck() {
           </button>
 
           <button
-            disabled={validButtonAI || !isSubmitSuccessful || errorAI}
+            disabled={validButtonAI || !isSubmitSuccessful || errorAI || loading}
             type='button'
             onClick={handleSuggestionsAI({ title, description, keyword })}
             className='px-6 py-3.5  rounded-lg duration-150 bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 active:shadow-lg w-2/4 disabled:opacity-75 disabled:cursor-not-allowed disabled:bg-rose-700'

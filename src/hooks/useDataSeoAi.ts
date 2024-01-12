@@ -12,31 +12,41 @@ const initialDataSeoAI: DataSeoAI = {
 export const useDataSeoAi = () => {
   const [suggestionsIa, setSuggestionsIa] = useState(initialDataSeoAI)
   const [error, setError] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false)
 
   const handleSuggestionsAI =
     ({ title, description, keyword }: DataSeoAI) =>
     async () => {
-      const data = await postDataAi({ title, description, keyword })
-      console.log({ data })
+      try {
+        setLoading(true)
 
-      if (data.status !== 200) {
+        const data = await postDataAi({ title, description, keyword })
+        console.log({ data })
+
+        if (data.status !== 200) {
+          setError(true)
+          setLoading(false)
+          return
+        }
+
+        console.log({ title })
+        setSuggestionsIa({
+          title,
+          description,
+          keyword,
+          active: true,
+        })
+
+        const node = document.getElementById('suggestions')
+        if (node) {
+          node.scrollIntoView({ block: 'end', behavior: 'smooth', inline: 'nearest' })
+        }
+      } catch (error) {
         setError(true)
-        return
-      }
-
-      console.log({ title })
-      setSuggestionsIa({
-        title,
-        description,
-        keyword,
-        active: true,
-      })
-
-      const node = document.getElementById('suggestions')
-      if (node) {
-        node.scrollIntoView({ block: 'end', behavior: 'smooth', inline: 'nearest' })
+      } finally {
+        setLoading(false)
       }
     }
 
-  return { handleSuggestionsAI, suggestionsIa, errorAI: error }
+  return { handleSuggestionsAI, suggestionsIa, errorAI: error, loading }
 }
