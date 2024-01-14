@@ -14,7 +14,12 @@ export const getDataAi = async () => {
   return res.json()
 }
 
-export const postDataAi = async (data: DataSeoAI) => {
+interface ApiResponse {
+  status: number
+  suggestions: { content: string }
+}
+
+export const postDataAi = async (data: DataSeoAI): Promise<ApiResponse> => {
   try {
     const res = await fetch(`/api`, {
       method: 'POST',
@@ -23,9 +28,11 @@ export const postDataAi = async (data: DataSeoAI) => {
 
     if (!res.ok) throw new CustomError('Error fetching suggestions API', res.status)
 
-    return { status: res.status, ...res.json() }
+    const suggestions = await res.json()
+
+    return { status: res.status, suggestions }
   } catch (error) {
     console.log({ error })
-    return error
+    throw error
   }
 }

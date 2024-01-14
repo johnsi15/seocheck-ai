@@ -61,7 +61,7 @@ export function Suggestions({ data: { title, description, keyword, active } }: P
           </button>
         </div>
 
-        {keyword && (
+        {keyword && keyword.length > 0 && (
           <input
             type='text'
             disabled

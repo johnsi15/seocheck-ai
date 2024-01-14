@@ -1,5 +1,5 @@
 import OpenAI from 'openai'
-import { OpenAIStream, StreamingTextResponse } from 'ai'
+// import { OpenAIStream, StreamingTextResponse } from 'ai'
 
 interface SeoData {
   title: string
@@ -12,7 +12,7 @@ const openai = new OpenAI({
 })
 
 async function suggestions({ title, description, keywords }: SeoData) {
-  console.log({ title, description, keywords })
+  console.log({ dataRouter: 'yes', title, description, keywords })
   // valid title, description y keywords con regex
 
   const response = await openai.chat.completions.create({
@@ -25,47 +25,40 @@ async function suggestions({ title, description, keywords }: SeoData) {
       },
       {
         role: 'user',
-        content: `Title: De la ilusión a la angustia: El ‘sueño americano’ convertido en pesadilla para una familia cucuteña \n 
-          Description: Padres cucuteños ruegan ayuda para rescatar a su familia secuestrada en su ruta a los Estados Unidos.`,
+        content: `Title: De la ilusión a la angustia: El ‘sueño americano’ convertido en pesadilla para una familia cucuteña\nDescription: Padres cucuteños ruegan ayuda para rescatar a su familia secuestrada en su ruta a los Estados Unidos.`,
       },
       {
         role: 'assistant',
-        content: `Título: De la ilusión a la angustia: El ‘sueño americano’ de una familia cucuteña \n 
-          Descripción: Familia cucuteña vive angustia en travesía a EE. UU. Padres ruegan ayuda para rescatar seres queridos secuestrados en odisea del ‘sueño americano’.`,
+        content: `Título: De la ilusión a la angustia: El ‘sueño americano’ de una familia cucuteña\nDescripción: Familia cucuteña vive angustia en travesía a EE. UU. Padres ruegan ayuda para rescatar seres queridos secuestrados en odisea del ‘sueño americano’.`,
       },
       {
         role: 'user',
-        content: `Title: De la ilusión a la angustia: El ‘sueño americano’ convertido en pesadilla para una familia cucuteña \n 
-          Description: Padres cucuteños ruegan ayuda para rescatar a su familia secuestrada en su ruta a los Estados Unidos.`,
+        content: `Title: De la ilusión a la angustia: El ‘sueño americano’ convertido en pesadilla para una familia cucuteña\nDescription: Padres cucuteños ruegan ayuda para rescatar a su familia secuestrada en su ruta a los Estados Unidos.`,
       },
       {
         role: 'assistant',
-        content: `Título: Pesadilla en ruta: Familia cucuteña ruega ayuda para rescatar a seres queridos \n 
-          Descripción: Esperanza de familia cucuteña se torna desesperación. Padres ruegan asistencia para liberar seres queridos secuestrados en peligrosa ruta hacia Estados Unidos.`,
+        content: `Título: Pesadilla en ruta: Familia cucuteña ruega ayuda para rescatar a seres queridos\nDescripción: Esperanza de familia cucuteña se torna desesperación. Padres ruegan asistencia para liberar seres queridos secuestrados en peligrosa ruta hacia Estados Unidos.`,
       },
       {
         role: 'user',
-        content: `Title: De la ilusión a la angustia: El ‘sueño americano’ convertido en pesadilla para una familia cucuteña \n 
-          Description: Padres cucuteños ruegan ayuda para rescatar a su familia secuestrada en su ruta a los Estados Unidos. \n Keywords: familia cucuteña`,
+        content: `Title: De la ilusión a la angustia: El ‘sueño americano’ convertido en pesadilla para una familia cucuteña\nDescription: Padres cucuteños ruegan ayuda para rescatar a su familia secuestrada en su ruta a los Estados Unidos.\n Keywords: familia cucuteña`,
       },
       {
         role: 'assistant',
-        content: `Título: De la ilusión a la angustia: El ‘Sueño Americano’ de una familia cucuteña \n
-          Descripción: Familia cucuteña vive angustia en travesía a EE. UU. Padres ruegan ayuda para rescatar seres queridos secuestrados en odisea del ‘Sueño Americano’. \n Palabra Clave: familia cucuteña`,
+        content: `Título: De la ilusión a la angustia: El ‘Sueño Americano’ de una familia cucuteña\nDescripción: Familia cucuteña vive angustia en travesía a EE. UU. Padres ruegan ayuda para rescatar seres queridos secuestrados en odisea del ‘Sueño Americano’.\nPalabra Clave: familia cucuteña`,
       },
       {
         role: 'user',
-        content: `Title: ${title}\nDescription: ${description}\n ${keywords.length > 0 ? `Keywords: ${keywords}` : ''}`,
+        content: `Title: ${title}\nDescription: ${description}\nKeywords: ${keywords}`,
       },
     ],
-    stream: true,
+    // stream: true,
   })
 
-  const stream = OpenAIStream(response)
-  console.log({ stream })
-  // console.log(stream.choices[0].message)
+  // const stream = OpenAIStream(response)
+  // console.log({ stream })
 
-  return stream
+  return response.choices[0].message
 }
 
 export const runtime = 'edge'
@@ -83,7 +76,8 @@ export async function POST(req: Request) {
   const { title, description, keyword } = await req.json()
   const keywords = keyword ?? ''
 
-  const stream = await suggestions({ title, description, keywords })
+  const messageSuggestions = await suggestions({ title, description, keywords })
 
-  return new StreamingTextResponse(stream)
+  // return new StreamingTextResponse(stream)
+  return Response.json(messageSuggestions)
 }

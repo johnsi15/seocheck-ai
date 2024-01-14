@@ -29,11 +29,16 @@ export const useDataSeoAi = () => {
           return
         }
 
-        console.log({ title })
+        const resSuggestions = data.suggestions.content.split('\n')
+
+        const titleSuggestions = resSuggestions[0]?.slice(8) ?? title
+        const descriptionSuggestions = resSuggestions[1]?.slice(13) ?? description
+        const keywordSuggestions = resSuggestions[2] || ''
+
         setSuggestionsIa({
-          title,
-          description,
-          keyword,
+          title: titleSuggestions,
+          description: descriptionSuggestions,
+          keyword: keywordSuggestions,
           active: true,
         })
 
