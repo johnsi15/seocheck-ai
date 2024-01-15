@@ -25,6 +25,8 @@ export function FormSeoCheck() {
   const onSubmit = (data: SeoCheck) => {
     console.log('onsubmit')
 
+    const hasMoreNumbers = (str: string) => /\d{10,}/.test(str)
+
     const { title, description, keyword } = data
     const regex = new RegExp(`\\b${keyword}\\b`, 'i')
 
@@ -41,6 +43,18 @@ export function FormSeoCheck() {
         message: `Incluye tu palabra clave (${keyword}) en la descripción para fortalecer la relevancia de tu contenido. Las meta descripciones no influyen directamente en el posicionamiento, pero pueden animar a los usuarios a hacer clic.`,
       })
     }
+
+    hasMoreNumbers(title) &&
+      setError('title', {
+        type: 'manual',
+        message: 'El título NO debe incluir más 10 números consecutivos.',
+      })
+
+    hasMoreNumbers(description) &&
+      setError('description', {
+        type: 'manual',
+        message: 'El descripción NO debe incluir más 10 números consecutivos.',
+      })
     // reset()
     return
   }
@@ -53,6 +67,8 @@ export function FormSeoCheck() {
   const keyword = getValues('keyword')
 
   const validButtonAI = !title || !description || isSubmitting || title.length < 55 || description.length < 120
+
+  console.log(errors)
 
   return (
     <>

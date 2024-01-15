@@ -20,10 +20,16 @@ interface ApiResponse {
 }
 
 export const postDataAi = async (data: DataSeoAI): Promise<ApiResponse> => {
+  const cleanData = {
+    title: data.title.trim(),
+    description: data.description.trim(),
+    keyword: data.keyword?.trim() ?? '',
+  }
+
   try {
     const res = await fetch(`/api`, {
       method: 'POST',
-      body: JSON.stringify(data),
+      body: JSON.stringify(cleanData),
     })
 
     if (!res.ok) throw new CustomError('Error fetching suggestions API', res.status)

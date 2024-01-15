@@ -3,7 +3,7 @@ import { ThemeSwitcher } from './ThemeSwitcher'
 
 export function Header() {
   return (
-    <header className='h-max border-b-2 border-gray-300 dark:border-gray-800'>
+    <header className='h-max border-b-2 border-gray-300 dark:border-gray-800 p-1 px-0 '>
       <nav className='items-center justify-between px-4 mx-auto max-w-screen-xl sm:px-8 md:flex md:space-x-6 h-14'>
         <div className='flex justify-between'>
           <a className='no-underline' href='/'>
@@ -14,7 +14,7 @@ export function Header() {
           <li className='pb-5 md:pb-0 bg-slate-400 dark:bg-slate-200 rounded hover:opacity-90'>
             <a
               href='https://www.buymeacoffee.com/jandrey15'
-              className='flex gap-1 text-gray-900 dark:text-gray-800 px-2 py-1'
+              className='flex gap-1 text-gray-900 dark:text-gray-800 px-2 py-1 items-center justify-center'
               aria-label='Cómprame un café'
               target='_blank'
               rel='noopener noreferrer'
