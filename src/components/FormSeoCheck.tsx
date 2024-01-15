@@ -66,9 +66,7 @@ export function FormSeoCheck() {
   const description = getValues('description')
   const keyword = getValues('keyword')
 
-  const validButtonAI = !title || !description || isSubmitting || title.length < 55 || description.length < 120
-
-  console.log(errors)
+  const validButtonAI = !title || !description || isSubmitting || title.length < 30 || description.length < 60
 
   return (
     <>
@@ -165,7 +163,7 @@ export function FormSeoCheck() {
           </button>
 
           <button
-            disabled={validButtonAI || !isSubmitSuccessful || errorAI || loading}
+            disabled={validButtonAI || isSubmitting || errorAI || loading}
             type='button'
             onClick={handleSuggestionsAI({ title, description, keyword })}
             className='px-6 py-3.5  rounded-lg duration-150 bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 active:shadow-lg w-2/4 disabled:opacity-75 disabled:cursor-not-allowed disabled:bg-rose-700'
@@ -190,8 +188,7 @@ export function FormSeoCheck() {
               <p className='mt-3'>
                 Para recibir <strong className='dark:text-rose-600 text-rose-700'>sugerencias</strong> a través de
                 inteligencia artificial <strong className='dark:text-rose-600 text-rose-700'>(AI)</strong>, es necesario
-                que tanto el título (con un mínimo de 55 caracteres) como la descripción (con un mínimo de 120
-                caracteres) cumplan con los requisitos establecidos.
+                que el título (con un mínimo de 55 caracteres) cumplan con los requisitos establecidos.
               </p>
             )}
           </article>
