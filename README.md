@@ -19,3 +19,5 @@ Require Node.js v20.9.0
 - [ ] add vídeo example main page
 - [x] valid title, description y keywords con regex in api/
 - [ ] add version mobile
+- [ ] add GA and events
+- [ ] add other tool analytic
