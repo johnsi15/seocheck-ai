@@ -22,3 +22,5 @@ Require Node.js v20.9.0
 - [ ] add version mobile
 - [ ] add GA and events
 - [ ] add other tool analytic
+- [x] add metaData
+- [ ] add siteMaps
