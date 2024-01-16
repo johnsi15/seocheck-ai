@@ -80,7 +80,7 @@ export function FormSeoCheck() {
           </p>
           <a
             href='/validar-seo'
-            className='relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800'
+            className='relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-rose-700 to-rose-700 group-hover:from-rose-700 group-hover:to-rose-700 hover:text-slate-200 dark:text-slate-200 focus:ring-2 focus:outline-none'
           >
             <span className='relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0'>
               Intenta con otro título y descripción
@@ -165,7 +165,7 @@ export function FormSeoCheck() {
           <button
             disabled={isSubmitting || errorAI.hasError}
             type='submit'
-            className='px-6 py-3.5  rounded-lg duration-150 bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 active:shadow-lg w-2/6 disabled:opacity-75 disabled:cursor-not-allowed disabled:bg-rose-700'
+            className='px-6 py-3.5  rounded-lg duration-150 bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 active:shadow-lg w-[150px] disabled:opacity-75 disabled:cursor-not-allowed disabled:bg-rose-700'
           >
             Validar SEO
           </button>
@@ -174,7 +174,7 @@ export function FormSeoCheck() {
             disabled={validButtonAI || isSubmitting || errorAI.hasError || loading}
             type='button'
             onClick={handleSuggestionsAI({ title, description, keyword })}
-            className='px-6 py-3.5  rounded-lg duration-150 bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 active:shadow-lg w-2/4 disabled:opacity-75 disabled:cursor-not-allowed disabled:bg-rose-700'
+            className='px-6 py-3.5  rounded-lg duration-150 bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 active:shadow-lg w-2/5 disabled:opacity-75 disabled:cursor-not-allowed disabled:bg-rose-700'
           >
             Generar sugerencias con AI
           </button>

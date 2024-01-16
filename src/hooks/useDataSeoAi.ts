@@ -28,11 +28,10 @@ export const useDataSeoAi = () => {
         if (localDataSeo.title === title && localDataSeo.description === description) {
           localDataSeo.count += 1
           localStorage.setItem('seoDataKey', JSON.stringify(localDataSeo))
+        } else if (localDataSeo.count > 3) {
+          localDataSeo = { title, description, count: 1 }
+          localStorage.setItem('seoDataKey', JSON.stringify(localDataSeo))
         }
-        // else if (localDataSeo.count > 3) {
-        //   localDataSeo = { title, description, count: 1 }
-        //   localStorage.setItem('seoDataKey', JSON.stringify(localDataSeo))
-        // }
       } else {
         localDataSeo = { title, description, count: 1 }
         localStorage.setItem('seoDataKey', JSON.stringify(localDataSeo))
