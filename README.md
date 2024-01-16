@@ -11,8 +11,9 @@ Require Node.js v20.9.0
 
 ## Tasks
 
-- [ ] add limit suggestions with AI for title, max 3 fer title
-- [ ] unlock the button to generate suggestions even if the  description  does not comply with  the validation
+- [x] add limit suggestions with AI for title, max 3 fer title
+- [ ] add limit for IP max request (?) for day
+- [x] unlock the button to generate suggestions even if the description does not comply with  the validation
 - [ ] add button donar
 - [x] add icon github
 - [x] add icon buy coffee
