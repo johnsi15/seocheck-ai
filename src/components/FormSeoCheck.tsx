@@ -70,15 +70,23 @@ export function FormSeoCheck() {
 
   return (
     <>
-      {!errorAI ? (
+      {!errorAI.hasError ? (
         <Suggestions data={suggestionsIa} />
       ) : (
-        <p className='text-lg dark:text-slate-200 text-pretty w-[700px] mb-5'>
-          Oops, algo salió mal al tratar de generar las sugerencias con inteligencia artificial.{' '}
-          <strong className='dark:text-rose-600 text-rose-700'>
-            Por favor, inténtalo de nuevo más tarde. Es posible que tu crédito se haya agotado.
-          </strong>
-        </p>
+        <div className='mb-5 flex flex-col items-center justify-center gap-4'>
+          <p className='text-lg dark:text-slate-200 text-pretty w-[700px]'>
+            Oops, algo salió mal al tratar de generar las sugerencias con inteligencia artificial.{' '}
+            <strong className='dark:text-rose-600 text-rose-700'>{errorAI.message}</strong>
+          </p>
+          <a
+            href='/validar-seo'
+            className='relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800'
+          >
+            <span className='relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0'>
+              Intenta con otro título y descripción
+            </span>
+          </a>
+        </div>
       )}
 
       {loading && <Loading />}
@@ -155,7 +163,7 @@ export function FormSeoCheck() {
 
         <div className='flex gap-3'>
           <button
-            disabled={isSubmitting}
+            disabled={isSubmitting || errorAI.hasError}
             type='submit'
             className='px-6 py-3.5  rounded-lg duration-150 bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 active:shadow-lg w-2/6 disabled:opacity-75 disabled:cursor-not-allowed disabled:bg-rose-700'
           >
@@ -163,7 +171,7 @@ export function FormSeoCheck() {
           </button>
 
           <button
-            disabled={validButtonAI || isSubmitting || errorAI || loading}
+            disabled={validButtonAI || isSubmitting || errorAI.hasError || loading}
             type='button'
             onClick={handleSuggestionsAI({ title, description, keyword })}
             className='px-6 py-3.5  rounded-lg duration-150 bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 active:shadow-lg w-2/4 disabled:opacity-75 disabled:cursor-not-allowed disabled:bg-rose-700'
@@ -188,7 +196,8 @@ export function FormSeoCheck() {
               <p className='mt-3'>
                 Para recibir <strong className='dark:text-rose-600 text-rose-700'>sugerencias</strong> a través de
                 inteligencia artificial <strong className='dark:text-rose-600 text-rose-700'>(AI)</strong>, es necesario
-                que el título (con un mínimo de 55 caracteres) cumplan con los requisitos establecidos.
+                que el título (con un mínimo de 30 caracteres) y la descripción (con un mínimo de 60 caracteres) cumplan
+                con estos requisitos establecidos.
               </p>
             )}
           </article>

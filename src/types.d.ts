@@ -4,3 +4,8 @@ export interface DataSeoAI {
   keyword?: string
   active?: boolean
 }
+
+export interface AIError {
+  hasError: boolean
+  message: string
+}

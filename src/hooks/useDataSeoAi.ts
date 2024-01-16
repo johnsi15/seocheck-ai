@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { type DataSeoAI } from '../types'
+import { type DataSeoAI, type AIError } from '../types'
 import { postDataAi } from '@/services/suggestionsData'
 
 const initialDataSeoAI: DataSeoAI = {
@@ -11,20 +11,50 @@ const initialDataSeoAI: DataSeoAI = {
 
 export const useDataSeoAi = () => {
   const [suggestionsIa, setSuggestionsIa] = useState(initialDataSeoAI)
-  const [error, setError] = useState<boolean>(false)
+  const [error, setError] = useState<AIError>({ hasError: false, message: '' })
   const [loading, setLoading] = useState<boolean>(false)
 
   const handleSuggestionsAI =
     ({ title, description, keyword }: DataSeoAI) =>
     async () => {
+      setLoading(true)
+
+      const storedData = localStorage.getItem('seoDataKey')
+
+      let localDataSeo
+
+      if (storedData !== null) {
+        localDataSeo = JSON.parse(storedData)
+        if (localDataSeo.title === title && localDataSeo.description === description) {
+          localDataSeo.count += 1
+          localStorage.setItem('seoDataKey', JSON.stringify(localDataSeo))
+        }
+        // else if (localDataSeo.count > 3) {
+        //   localDataSeo = { title, description, count: 1 }
+        //   localStorage.setItem('seoDataKey', JSON.stringify(localDataSeo))
+        // }
+      } else {
+        localDataSeo = { title, description, count: 1 }
+        localStorage.setItem('seoDataKey', JSON.stringify(localDataSeo))
+      }
+
       try {
-        setLoading(true)
+        if (localDataSeo.count > 3) {
+          setError({
+            hasError: true,
+            message: 'Lo siento, no es posible generar más sugerencias para este título y descripción en particular.',
+          })
+          setLoading(false)
+          return
+        }
 
         const data = await postDataAi({ title, description, keyword })
-        console.log({ data })
 
         if (data.status !== 200) {
-          setError(true)
+          setError({
+            hasError: true,
+            message: 'Por favor, inténtalo de nuevo más tarde. Es posible que tu crédito se haya agotado.',
+          })
           setLoading(false)
           return
         }
@@ -47,7 +77,7 @@ export const useDataSeoAi = () => {
           node.scrollIntoView({ block: 'end', behavior: 'smooth', inline: 'nearest' })
         }
       } catch (error) {
-        setError(true)
+        setError({ hasError: true, message: 'Por favor, inténtalo de nuevo más tarde.' })
       } finally {
         setLoading(false)
       }
