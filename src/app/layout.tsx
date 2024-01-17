@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
-import Script from 'next/script'
+// import Script from 'next/script'
+import { GTMnoscript, GTMscript } from '@/components/GTM'
 import { Lato } from 'next/font/google'
 import './globals.css'
 import { ThemeProviders } from '@/components/ThemeProviders'
@@ -35,11 +36,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='es'>
       <body className={`${lato.className} bg-slate-100 dark:bg-slate-900`}>
+        <GTMnoscript />
         <ThemeProviders attribute='class' storageKey='theme' defaultTheme='system' enableSystem>
           {children}
         </ThemeProviders>
       </body>
-      <Script src='https://www.googletagmanager.com/gtag/js?id=G-F4NC0KEW3E' />
+      {/* <Script src='https://www.googletagmanager.com/gtag/js?id=G-F4NC0KEW3E' />
       <Script id='google-analytics' strategy='afterInteractive'>
         {`
           window.dataLayer = window.dataLayer || [];
@@ -48,7 +50,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         
           gtag('config', 'G-F4NC0KEW3E');
         `}
-      </Script>
+      </Script> */}
+      <GTMscript />
     </html>
   )
 }
