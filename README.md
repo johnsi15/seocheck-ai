@@ -20,7 +20,8 @@ Require Node.js v20.9.0
 - [ ] add vídeo example main page
 - [x] valid title, description y keywords con regex in api/
 - [ ] add version mobile
-- [ ] add GA and events
+- [x] add script GA or GTM
+- [ ] add events click GA
 - [ ] add other tool analytic
 - [x] add metaData
 - [ ] add siteMaps
