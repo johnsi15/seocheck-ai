@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { FormSeoCheck } from '@/components/FormSeoCheck'
 import { Header } from '@/components/Header'
 import { metaInfoDefault, openGraph, twitter } from '@/lib/consts'
+import { Donate } from '@/components/Donate'
 
 export const metadata: Metadata = {
   title: 'Valida el SEO de tu artículo',
@@ -33,6 +34,8 @@ export default function CheckSeo() {
           Valida el <span className='dark:text-rose-600 text-rose-700'>SEO</span> de tu artículo
         </h1>
         <FormSeoCheck />
+
+        <Donate />
       </main>
     </>
   )

@@ -22,7 +22,7 @@ Require Node.js v20.9.0
 - [ ] add version mobile
 - [x] add script GA or GTM
 - [ ] add events click GA
-- [ ] add other tool analytic
+- [x] add other tool analytic
 - [x] add metaData
 - [ ] add siteMaps
 - [ ] add footer
