@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-// import Script from 'next/script'
+import { AxiomWebVitals } from 'next-axiom'
 import { GTMnoscript, GTMscript } from '@/components/GTM'
 import { Lato } from 'next/font/google'
 import './globals.css'
@@ -41,16 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </ThemeProviders>
       </body>
-      {/* <Script src='https://www.googletagmanager.com/gtag/js?id=G-F4NC0KEW3E' />
-      <Script id='google-analytics' strategy='afterInteractive'>
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-        
-          gtag('config', 'G-F4NC0KEW3E');
-        `}
-      </Script> */}
+      <AxiomWebVitals />
       <GTMscript />
     </html>
   )
