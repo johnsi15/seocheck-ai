@@ -1,6 +1,7 @@
 'use client'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useLogger } from 'next-axiom'
 import { SeoCheck, seoCheckSchema } from '@/lib/types'
 import { ErrorsMessage, ErrorsSuccess } from './ErrorsSuccess'
 import { Suggestions } from './Suggestions'
@@ -21,6 +22,7 @@ export function FormSeoCheck() {
   })
 
   const { handleSuggestionsAI, suggestionsIa, errorAI, loading } = useDataSeoAi()
+  const log = useLogger()
 
   const onSubmit = (data: SeoCheck) => {
     console.log('onsubmit')
@@ -30,11 +32,15 @@ export function FormSeoCheck() {
     const { title, description, keyword } = data
     const regex = new RegExp(`\\b${keyword}\\b`, 'i')
 
+    log.debug('Data sent to validate debug', data)
+
     if (keyword && !regex.test(title)) {
       setError('title', {
         type: 'manual',
         message: `Incluye tu palabra clave (${keyword}) en el título para fortalecer la relevancia de tu contenido. Cuanto más a la izquierda aparezca la palabra clave en el título, mejor. Esto ayuda a Google a saber de qué trata el contenido.`,
       })
+
+      log.warn('Keyword not found in title', data)
     }
 
     if (keyword && !regex.test(description)) {
@@ -42,6 +48,8 @@ export function FormSeoCheck() {
         type: 'manual',
         message: `Incluye tu palabra clave (${keyword}) en la descripción para fortalecer la relevancia de tu contenido. Las meta descripciones no influyen directamente en el posicionamiento, pero pueden animar a los usuarios a hacer clic.`,
       })
+
+      log.warn('Keyword not found in description', data)
     }
 
     hasMoreNumbers(title) &&
@@ -56,6 +64,7 @@ export function FormSeoCheck() {
         message: 'El descripción NO debe incluir más 10 números consecutivos.',
       })
     // reset()
+    log.info('Validated and correct SEO', data)
     return
   }
 

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useLogger } from 'next-axiom'
 import { type DataSeoAI, type AIError } from '../types'
 import { postDataAi } from '@/services/suggestionsData'
 
@@ -13,12 +14,12 @@ export const useDataSeoAi = () => {
   const [suggestionsIa, setSuggestionsIa] = useState(initialDataSeoAI)
   const [error, setError] = useState<AIError>({ hasError: false, message: '' })
   const [loading, setLoading] = useState<boolean>(false)
+  const log = useLogger()
 
   const handleSuggestionsAI =
     ({ title, description, keyword }: DataSeoAI) =>
     async () => {
       setLoading(true)
-
       const storedData = localStorage.getItem('seoDataKey')
 
       let localDataSeo
@@ -38,22 +39,30 @@ export const useDataSeoAi = () => {
 
       try {
         if (localDataSeo.count > 3) {
+          const message =
+            'Lo siento, no es posible generar más sugerencias para este título y descripción en particular.'
           setError({
             hasError: true,
-            message: 'Lo siento, no es posible generar más sugerencias para este título y descripción en particular.',
+            message,
           })
+
           setLoading(false)
+          log.warn('LocalStorage data rate limit suggestions, max 3 same title and description', { message })
           return
         }
 
         const data = await postDataAi({ title, description, keyword })
 
         if (data.status !== 200) {
+          const message = 'Por favor, inténtalo de nuevo más tarde. Es posible que tu crédito se haya agotado.'
+
           setError({
             hasError: true,
-            message: 'Por favor, inténtalo de nuevo más tarde. Es posible que tu crédito se haya agotado.',
+            message,
           })
+
           setLoading(false)
+          log.error('API Error generating suggestions possibly exhausted credit', { status: data.status, message })
           return
         }
 
@@ -70,12 +79,15 @@ export const useDataSeoAi = () => {
           active: true,
         })
 
+        log.info('API Suggestions generated', { status: 200, suggestions: resSuggestions })
+
         const node = document.getElementById('suggestions')
         if (node) {
           node.scrollIntoView({ block: 'end', behavior: 'smooth', inline: 'nearest' })
         }
       } catch (error) {
         setError({ hasError: true, message: 'Por favor, inténtalo de nuevo más tarde.' })
+        log.error('API Error generating suggestions', { error })
       } finally {
         setLoading(false)
       }
