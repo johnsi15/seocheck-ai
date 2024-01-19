@@ -7,7 +7,7 @@ export function Donate() {
             Apóyanos contribuye para mantener y mejorar la herramienta{' '}
             <strong className='text-rose-700 dark:text-rose-600 font-semibold'>SEO CheckAI</strong>
           </h2>
-          <p className='mb-7 font-light text-black dark:text-slate-200 md:text-lg'>
+          <p className='mb-7 font-normal text-black dark:text-slate-400 md:text-lg tracking-wide'>
             Si te gusta nuestra herramienta de validación de SEO y encuentras valor en ella, considera hacer una{' '}
             <strong className='text-rose-700 dark:text-rose-600 font-semibold'>
               donación para apoyar nuestro trabajo
