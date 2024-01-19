@@ -25,4 +25,5 @@ Require Node.js v20.9.0
 - [x] add other tool analytic
 - [x] add metaData
 - [ ] add siteMaps
+- [ ] add JSONld microdata
 - [ ] add footer
