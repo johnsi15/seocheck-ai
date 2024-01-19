@@ -18,6 +18,7 @@ Require Node.js v20.9.0
 - [x] add icon github
 - [x] add icon buy coffee
 - [ ] add vídeo example main page
+- [x] add tool features main page
 - [x] valid title, description y keywords con regex in api/
 - [ ] add version mobile
 - [x] add script GA or GTM
