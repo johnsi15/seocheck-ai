@@ -4,6 +4,7 @@ import { Header } from '@/components/Header'
 import { metaInfoDefault, openGraph, twitter } from '@/lib/consts'
 import { Donate } from '@/components/Donate'
 import { Recommendations } from '@/components/Recommendations'
+import { Footer } from '@/components/Footer'
 
 export const metadata: Metadata = {
   title: 'Valida el SEO de tu artículo',
@@ -40,6 +41,8 @@ export default function CheckSeo() {
 
         <Recommendations />
       </main>
+
+      <Footer />
     </>
   )
 }
