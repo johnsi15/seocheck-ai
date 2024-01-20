@@ -27,5 +27,5 @@ Require Node.js v20.9.0
 - [x] add metaData
 - [ ] add siteMaps
 - [ ] add JSONld microdata
-- [ ] add footer
+- [x] add footer
 - [x] add recommendations below the form validate SEO
