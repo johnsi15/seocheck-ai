@@ -1,6 +1,6 @@
 export function Donate() {
   return (
-    <section className='bg-slate-200 dark:bg-transparent  mt-16 rounded-xl dark:border-2 dark:border-slate-500'>
+    <section className='bg-slate-200 dark:bg-transparent  mt-[100px] rounded-xl dark:border-2 dark:border-slate-500'>
       <div className='py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6'>
         <div className='mx-auto max-w-screen-sm text-center'>
           <h2 className='mb-4 text-4xl tracking-tight font-extrabold leading-tight text-gray-900 dark:text-slate-200'>

@@ -36,9 +36,9 @@ export default function CheckSeo() {
         </h1>
         <FormSeoCheck />
 
-        <Recommendations />
-
         <Donate />
+
+        <Recommendations />
       </main>
     </>
   )
