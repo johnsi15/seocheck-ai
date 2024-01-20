@@ -51,9 +51,8 @@ export function FeatureList() {
 
       <div className='flex flex-col'>
         <h2 className='mb-4 text-4xl tracking-tight font-extrabold leading-tight text-gray-900 dark:text-slate-200 text-balance'>
-          Genera sugerencias con{' '}
-          <strong className='text-rose-700 dark:text-rose-600 font-semibold'>inteligencia artificial</strong> para
-          potenciar tu SEO
+          Genera sugerencias con <strong className={`${strongStyle}`}>inteligencia artificial</strong> para potenciar tu
+          SEO
         </h2>
         <p className='mb-7 font-normal text-slate-800 dark:text-slate-400 md:text-lg tracking-wide text-pretty'>
           Potencia tu SEO con sugerencias generadas con inteligencia artificial. Valida caracteres, palabras clave y
@@ -61,16 +60,16 @@ export function FeatureList() {
         </p>
         <ul className='p-0 m-0 flex flex-col gap-4 text-pretty text-base text-black dark:text-slate-200  tracking-wide'>
           <li>
-            ✅ <strong className='text-rose-700 dark:text-rose-600 font-semibold'>Personalización efectiva:</strong>{' '}
-            Ajusta tus títulos, descripciones y palabras clave de manera eficiente y personalizada con sugerencias AI.
+            ✅ <strong className={`${strongStyle}`}>Personalización efectiva:</strong> Ajusta tus títulos, descripciones
+            y palabras clave de manera eficiente y personalizada con sugerencias AI.
           </li>
           <li>
-            ✅ <strong className='text-rose-700 dark:text-rose-600 font-semibold'>Rápida optimización SEO:</strong>{' '}
-            Optimiza tu contenido rápidamente con recomendaciones precisas basadas en inteligencia artificial.
+            ✅ <strong className={`${strongStyle}`}>Rápida optimización SEO:</strong> Optimiza tu contenido rápidamente
+            con recomendaciones precisas basadas en inteligencia artificial.
           </li>
           <li>
-            ✅ <strong className='text-rose-700 dark:text-rose-600 font-semibold'>Impacto SEO Máximo:</strong> Mejora la
-            visibilidad de tu contenido implementando sugerencias AI, maximizando tu impacto en los motores de búsqueda.
+            ✅ <strong className={`${strongStyle}`}>Impacto SEO Máximo:</strong> Mejora la visibilidad de tu contenido
+            implementando sugerencias AI, maximizando tu impacto en los motores de búsqueda.
           </li>
         </ul>
       </div>
