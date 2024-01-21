@@ -1,4 +1,5 @@
 import { IconHeart } from './Icons'
+
 export function Footer() {
   return (
     <footer className='bg-slate-900 shadow dark:bg-transparent mt-[100px]'>

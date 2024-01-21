@@ -27,5 +27,7 @@ Require Node.js v20.9.0
 - [x] add metaData
 - [ ] add siteMaps
 - [ ] add JSONld microdata
+- [ ] add logo and review metadata
 - [x] add footer
 - [x] add recommendations below the form validate SEO
+- [x] deploy app to vercel and config domain
