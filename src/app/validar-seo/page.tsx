@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description:
       'Optimiza tu presencia en línea con SEO CheckAI. Valida y mejora la eficacia de tus títulos y descripciones para destacar en los resultados de búsqueda. ',
     ...openGraph,
-    images: ['/share.jpg'],
+    images: ['https://seocheckai.com/share.jpg'],
     url: 'https://johnserrano.co/', // url site now
   },
   twitter: {

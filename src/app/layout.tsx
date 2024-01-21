@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     title,
     description,
     ...openGraph,
-    images: ['/share.jpg'],
+    images: ['https://seocheckai.com/share.jpg'],
     url: 'https://johnserrano.co/', // url site now
   },
   twitter: {

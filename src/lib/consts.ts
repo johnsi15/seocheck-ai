@@ -22,5 +22,5 @@ export const twitter = {
   // siteId: '1467726470533754880',
   creator: '@Jandrey15',
   creatorId: '1467726470533754880',
-  images: ['https://nextjs.org/og.png'], // Must be an absolute URL
+  images: ['https://seocheckai.com/og.png'], // Must be an absolute URL
 }
