@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { AxiomWebVitals } from 'next-axiom'
-import { GTMnoscript, GTMscript } from '@/components/GTM'
+import { GoogleTagManager } from '@next/third-parties/google'
 import { Lato } from 'next/font/google'
 import './globals.css'
 import { ThemeProviders } from '@/components/ThemeProviders'
@@ -43,13 +43,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='es'>
       <body className={`${lato.className} bg-slate-100 dark:bg-slate-900`}>
-        <GTMnoscript />
         <ThemeProviders attribute='class' storageKey='theme' defaultTheme='system' enableSystem>
           {children}
         </ThemeProviders>
       </body>
       <AxiomWebVitals />
-      <GTMscript />
+      <GoogleTagManager gtmId='GTM-K2B7XRFP' />
     </html>
   )
 }
