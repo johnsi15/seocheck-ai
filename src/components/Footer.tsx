@@ -47,9 +47,15 @@ export function Footer() {
         <hr className='my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8' />
         <span className='text-sm text-slate-200 sm:text-center dark:text-gray-300 flex gap-1 justify-center'>
           Desarrollado con <IconHeart /> por{' '}
-          <a href='https://johnserrano.co/' className='hover:underline font-semibold'>
+          <a
+            href='https://johnserrano.co/'
+            target='_blank'
+            rel='noopener noreferrer'
+            className='hover:underline font-semibold'
+          >
             John Serrano
           </a>
+          🚀
         </span>
       </div>
     </footer>
