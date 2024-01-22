@@ -6,8 +6,8 @@ export function Header() {
     <header className='h-max border-b-2 border-gray-300 dark:border-gray-800 p-1 px-0 '>
       <nav className='items-center justify-between px-4 mx-auto max-w-screen-xl sm:px-8 md:flex md:space-x-6 h-14'>
         <div className='flex justify-between'>
-          <a className='no-underline' href='/'>
-            SEO CheckAI
+          <a className='no-underline' href='/' aria-label='Home seocheckai'>
+            <img src='/logo-seocheckai.webp' alt='Home seocheckai' />
           </a>
         </div>
         <ul className={`flex-1  mt-12 md:flex md:mt-0 items-center justify-end gap-1`}>
