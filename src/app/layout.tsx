@@ -23,13 +23,13 @@ export const metadata: Metadata = {
     ...openGraph,
     images: [
       {
-        url: 'https://seocheckai.com/share.png', // Must be an absolute URL
+        url: 'https://seocheckai.com/share.png',
         width: 1640,
         height: 924,
         alt: 'seocheckai',
       },
     ],
-    url: 'https://seocheckai.com/', // url site now
+    url: 'https://seocheckai.com/',
   },
   twitter: {
     title,

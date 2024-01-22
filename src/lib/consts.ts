@@ -10,6 +10,10 @@ export const metaInfoDefault = {
   authors: [{ name: 'John Serrano', url: 'https://johnserrano.co/' }],
   creator: 'John Serrano',
   publisher: 'John Serrano',
+  icons: {
+    icon: '/icon.png',
+    apple: '/apple-touch-icon.png',
+  },
 }
 
 export const openGraph = {
