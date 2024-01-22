@@ -1,11 +1,11 @@
 export const LANG = 'es'
 
-export const title = 'SEO CheckAI Potencia la visibilidad de tu contenido'
-export const description = 'Descubre el poder de SEO CheckAI para impulsar la visibilidad de tu contenido en línea'
+export const title = 'seocheckai Potencia la visibilidad de tu contenido'
+export const description = 'Descubre el poder de seocheckai para impulsar la visibilidad de tu contenido en línea'
 
 export const metaInfoDefault = {
   generator: 'Next.js',
-  applicationName: 'SEOCheckAI',
+  applicationName: 'seocheckai',
   keywords: ['seo', 'buenas-practicas', 'AI', 'IA', 'Inteligencia Artificial'],
   authors: [{ name: 'John Serrano', url: 'https://johnserrano.co/' }],
   creator: 'John Serrano',
@@ -15,12 +15,12 @@ export const metaInfoDefault = {
 export const openGraph = {
   locale: 'es_LA',
   type: 'website',
-  siteName: 'SEOCheckAI',
+  siteName: 'seocheckai',
 }
 export const twitter = {
   card: 'summary_large_image',
   // siteId: '1467726470533754880',
   creator: '@Jandrey15',
   creatorId: '1467726470533754880',
-  images: ['https://seocheckai.com/og.png'], // Must be an absolute URL
+  images: ['https://seocheckai.com/share.png'], // Must be an absolute URL
 }

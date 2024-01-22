@@ -9,20 +9,27 @@ import { Footer } from '@/components/Footer'
 export const metadata: Metadata = {
   title: 'Valida el SEO de tu artículo',
   description:
-    'Optimiza tu presencia en línea con SEO CheckAI. Valida y mejora la eficacia de tus títulos y descripciones para destacar en los resultados de búsqueda. ',
+    'Optimiza tu presencia en línea con seocheckai. Valida y mejora la eficacia de tus títulos y descripciones para destacar en los resultados de búsqueda. ',
   ...metaInfoDefault,
   openGraph: {
     title: 'Valida el SEO de tu artículo',
     description:
-      'Optimiza tu presencia en línea con SEO CheckAI. Valida y mejora la eficacia de tus títulos y descripciones para destacar en los resultados de búsqueda. ',
+      'Optimiza tu presencia en línea con seocheckai. Valida y mejora la eficacia de tus títulos y descripciones para destacar en los resultados de búsqueda. ',
     ...openGraph,
-    images: ['https://seocheckai.com/share.jpg'],
-    url: 'https://johnserrano.co/', // url site now
+    images: [
+      {
+        url: 'https://seocheckai.com/share.png',
+        width: 1640,
+        height: 924,
+        alt: 'seocheckai',
+      },
+    ],
+    url: 'https://seocheckai.com/',
   },
   twitter: {
     title: 'Valida el SEO de tu artículo',
     description:
-      'Optimiza tu presencia en línea con SEO CheckAI. Valida y mejora la eficacia de tus títulos y descripciones para destacar en los resultados de búsqueda. ',
+      'Optimiza tu presencia en línea con seocheckai. Valida y mejora la eficacia de tus títulos y descripciones para destacar en los resultados de búsqueda. ',
     ...twitter,
   },
 }

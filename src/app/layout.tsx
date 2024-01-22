@@ -21,8 +21,15 @@ export const metadata: Metadata = {
     title,
     description,
     ...openGraph,
-    images: ['https://seocheckai.com/share.jpg'],
-    url: 'https://johnserrano.co/', // url site now
+    images: [
+      {
+        url: 'https://seocheckai.com/share.png', // Must be an absolute URL
+        width: 1640,
+        height: 924,
+        alt: 'seocheckai',
+      },
+    ],
+    url: 'https://seocheckai.com/', // url site now
   },
   twitter: {
     title,
