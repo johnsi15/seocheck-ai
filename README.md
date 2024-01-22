@@ -22,11 +22,12 @@ Require Node.js v20.9.0
 - [x] valid title, description y keywords con regex in api/
 - [ ] add version mobile
 - [x] add script GA or GTM
-- [ ] add events click GA
+- [x] add events click GA
 - [x] add other tool analytic
 - [x] add metaData
 - [ ] add siteMaps
 - [ ] add JSONld microdata
+- [ ] add banner info
 - [x] add logo and review metadata
 - [x] add favicon
 - [x] add footer
