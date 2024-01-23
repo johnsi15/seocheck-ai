@@ -1,9 +1,16 @@
 'use client'
 
+import { useState } from 'react'
+
 export function Banner() {
+  const [close, setClose] = useState(false)
+
   const handleClose = () => {
     console.log('close banner')
+    setClose(true)
   }
+
+  if (close) return
 
   return (
     <div
@@ -41,7 +48,7 @@ export function Banner() {
         <button
           data-dismiss-target='#sticky-banner'
           type='button'
-          className='flex-shrink-0 inline-flex justify-center w-7 h-7 items-center text-gray-800 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 dark:hover:bg-gray-600 dark:hover:text-white'
+          className='flex-shrink-0 inline-flex justify-center w-7 h-7 items-center text-gray-800 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 dark:hover:bg-gray-600 dark:hover:text-white dark:text-slate-200'
           onClick={handleClose}
         >
           <svg
