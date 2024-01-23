@@ -8,7 +8,7 @@ import { Footer } from '@/components/Footer'
 import { Banner } from '@/components/Banner'
 
 export const metadata: Metadata = {
-  title: 'Valida el SEO de tu artículo',
+  title: 'seocheckai | Valida el SEO de tu artículo',
   description:
     'Optimiza tu presencia en línea con seocheckai. Valida y mejora la eficacia de tus títulos y descripciones para destacar en los resultados de búsqueda. ',
   ...metaInfoDefault,

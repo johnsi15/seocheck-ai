@@ -1,6 +1,6 @@
 export const LANG = 'es'
 
-export const title = 'seocheckai Potencia la visibilidad de tu contenido'
+export const title = 'seocheckai | Potencia la visibilidad de tu contenido'
 export const description = 'Descubre el poder de seocheckai para impulsar la visibilidad de tu contenido en línea'
 
 export const metaInfoDefault = {
