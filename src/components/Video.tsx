@@ -41,5 +41,5 @@ export function Video() {
     importComponent()
   }, [])
 
-  return <section className='aspect-video mx-16 mt-20 mb-28'>{importedComponent}</section>
+  return <section className='aspect-video md:mx-16 md:mt-20 md:mb-28'>{importedComponent}</section>
 }
