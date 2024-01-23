@@ -1,4 +1,10 @@
+'use client'
+
 export function Banner() {
+  const handleClose = () => {
+    console.log('close banner')
+  }
+
   return (
     <div
       id='sticky-banner'
@@ -36,6 +42,7 @@ export function Banner() {
           data-dismiss-target='#sticky-banner'
           type='button'
           className='flex-shrink-0 inline-flex justify-center w-7 h-7 items-center text-gray-400 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 dark:hover:bg-gray-600 dark:hover:text-white'
+          onClick={handleClose}
         >
           <svg
             className='w-3 h-3'
