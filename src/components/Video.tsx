@@ -1,6 +1,7 @@
 'use client'
 
-import Plyr, { type PlyrOptions, type PlyrSource } from 'plyr-react'
+import React, { ReactElement, useEffect, useState } from 'react'
+import { type PlyrOptions, type PlyrSource } from 'plyr-react'
 import 'plyr-react/plyr.css'
 import '@/styles/video.css'
 
@@ -28,9 +29,17 @@ const plyrProps: PlyrProps = {
 }
 
 export function Video() {
-  return (
-    <section className='aspect-video mx-16 mt-20 mb-28'>
-      <Plyr {...plyrProps} />
-    </section>
-  )
+  const [importedComponent, setImportedComponent] = useState<ReactElement | null>(null)
+
+  useEffect(() => {
+    const importComponent = async () => {
+      const myModule = await import('plyr-react')
+      const Plyr = myModule.default
+      setImportedComponent(<Plyr {...plyrProps} />)
+    }
+
+    importComponent()
+  }, [])
+
+  return <section className='aspect-video mx-16 mt-20 mb-28'>{importedComponent}</section>
 }
