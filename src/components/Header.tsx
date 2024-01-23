@@ -7,8 +7,20 @@ export function Header() {
       <nav className='items-center justify-between px-4 mx-auto max-w-screen-xl sm:px-8 md:flex md:space-x-6 h-14'>
         <div className='flex justify-between'>
           <a className='no-underline' href='/' aria-label='Home seocheckai'>
-            <img className='hidden dark:block' src='/logo-seocheckai.webp' alt='Home seocheckai' />
-            <img className='block dark:hidden' src='/logo-oscuro.webp' alt='Home seocheckai oscuro' />
+            <img
+              className='hidden dark:block'
+              src='/logo-seocheckai.webp'
+              alt='Home seocheckai'
+              width={129}
+              height={50}
+            />
+            <img
+              className='block dark:hidden'
+              src='/logo-oscuro.webp'
+              alt='Home seocheckai oscuro'
+              width={129}
+              height={50}
+            />
           </a>
         </div>
         <ul className={`flex-1  mt-12 md:flex md:mt-0 items-center justify-end gap-1`}>
