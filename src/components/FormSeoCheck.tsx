@@ -190,7 +190,7 @@ export function FormSeoCheck() {
         </div>
 
         {(errors.title || errors.description) && (
-          <article className='text-lg dark:text-slate-200 w-[700px] text-pretty'>
+          <article className='text-lg dark:text-slate-200 md:w-[700px] text-pretty'>
             <p>
               Ten en cuenta que las recomendaciones para escribir los títulos y descripciones no son reglas estrictas en
               cuanto a la <strong className='dark:text-rose-600 text-rose-700'>cantidad de caracteres</strong>, pero sí

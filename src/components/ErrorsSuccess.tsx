@@ -10,7 +10,7 @@ interface Props {
 
 export function ErrorsSuccess({ success, errors }: Props) {
   return (
-    <div className='absolute inset-y-0 -end-10 flex items-center ps-3 pointer-events-none'>
+    <div className='hidden absolute inset-y-0 -end-10 md:flex items-center ps-3 pointer-events-none'>
       {success && <IconSuccess />}
       {errors && <IconError />}
     </div>

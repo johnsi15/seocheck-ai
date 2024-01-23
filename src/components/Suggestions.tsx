@@ -17,11 +17,12 @@ export function Suggestions({ data: { title, description, keyword, active } }: P
       id='suggestions'
       className={`
         w-full
+        md:w-[700px]
         overflow-hidden transition-[max-height] duration-500 ease-in 
        ${active ? 'max-h-96' : 'max-h-0'}
     `}
     >
-      <div className={`flex flex-col gap-5 w-[700px] bg-blue-950 rounded text-white pt-8 pl-5 pr-5 pb-8 mb-7`}>
+      <div className={`flex flex-col gap-5 bg-blue-950 rounded text-white pt-8 pl-5 pr-5 pb-8 mb-7`}>
         <h2 className='text-xl text-balance'>
           Sugerencias de título y descripción generadas con inteligencia artificial{' '}
           <strong className='dark:text-rose-600 text-rose-700'>(AI)</strong>
