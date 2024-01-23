@@ -5,6 +5,7 @@ import { metaInfoDefault, openGraph, twitter } from '@/lib/consts'
 import { Donate } from '@/components/Donate'
 import { Recommendations } from '@/components/Recommendations'
 import { Footer } from '@/components/Footer'
+import { Banner } from '@/components/Banner'
 
 export const metadata: Metadata = {
   title: 'Valida el SEO de tu artículo',
@@ -37,6 +38,7 @@ export const metadata: Metadata = {
 export default function CheckSeo() {
   return (
     <>
+      <Banner />
       <Header />
       <main className='flex flex-col items-center p-24'>
         <h1 className='text-4xl dark:text-slate-200 mb-10 text-center'>
