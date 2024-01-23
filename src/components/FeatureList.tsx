@@ -37,7 +37,7 @@ export function FeatureList() {
         />
       </div>
 
-      <div className='order-4 my-5 md:my-0 dark:border-2 border-slate-700 rounded px-2 py-5 overflow-hidden dark:bg-transparent bg-slate-900'>
+      <div className='order-4 md:order-none my-5 md:my-0 dark:border-2 border-slate-700 rounded px-2 py-5 overflow-hidden dark:bg-transparent bg-slate-900'>
         <img
           className='object-cover transition duration-300 ease-in-out hover:scale-105'
           src='/example-2.webp'
