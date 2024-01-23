@@ -17,7 +17,7 @@ Require Node.js v20.9.0
 - [x] add button donar
 - [x] add icon github
 - [x] add icon buy coffee
-- [ ] add vídeo example main page
+- [x] add vídeo example main page
 - [x] add tool features main page
 - [x] valid title, description y keywords con regex in api/
 - [ ] add version mobile
@@ -27,7 +27,7 @@ Require Node.js v20.9.0
 - [x] add metaData
 - [ ] add siteMaps
 - [ ] add JSONld microdata
-- [ ] add banner info
+- [x] add banner info
 - [x] add logo and review metadata
 - [x] add favicon
 - [x] add footer
