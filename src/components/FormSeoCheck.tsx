@@ -100,7 +100,7 @@ export function FormSeoCheck() {
 
       {loading && <Loading />}
 
-      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5 w-11/12 md:w-[700px]'>
+      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5 w-full md:w-[700px]'>
         <label htmlFor='title' className='flex flex-col'>
           <span className='mb-2 text-lg text-slate-800 dark:text-slate-200 font-semibold text-balance'>
             Ingresa un título descriptivo para tu contenido, asegúrate de que sea claro y relevante para mejorar la
