@@ -2,7 +2,7 @@ export function FeatureList() {
   const strongStyle = 'text-rose-700 dark:text-rose-600 font-semibold'
 
   return (
-    <section className='grid grid-cols-2 mt-10 gap-x-10 gap-y-16 items-center'>
+    <section className='flex flex-col md:grid grid-cols-2 mt-10 md:gap-x-10 md:gap-y-16 items-center px-3'>
       <div className='flex flex-col'>
         <h2 className='mb-4 text-4xl tracking-tight font-extrabold leading-tight text-gray-900 dark:text-slate-200 text-balance'>
           Valida el <strong className={`${strongStyle}`}>SEO</strong> de tu artículo antes de publicarlo
@@ -26,7 +26,7 @@ export function FeatureList() {
           </li>
         </ul>
       </div>
-      <div className='dark:border-2 border-slate-700 rounded px-2 py-5 overflow-hidden dark:bg-transparent bg-slate-900'>
+      <div className='my-5 md:my-0 dark:border-2 border-slate-700 rounded px-2 py-5 overflow-hidden dark:bg-transparent bg-slate-900'>
         <img
           className='object-cover transition duration-300 ease-in-out hover:scale-105'
           src='/example-1.webp'
@@ -37,8 +37,7 @@ export function FeatureList() {
         />
       </div>
 
-      {/* block #2 */}
-      <div className='dark:border-2 border-slate-700 rounded px-2 py-5 overflow-hidden dark:bg-transparent bg-slate-900'>
+      <div className='order-4 my-5 md:my-0 dark:border-2 border-slate-700 rounded px-2 py-5 overflow-hidden dark:bg-transparent bg-slate-900'>
         <img
           className='object-cover transition duration-300 ease-in-out hover:scale-105'
           src='/example-2.webp'
