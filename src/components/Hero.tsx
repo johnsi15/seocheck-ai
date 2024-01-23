@@ -12,7 +12,7 @@ export function Hero() {
   return (
     <>
       <Header />
-      <section className='mt-24 mx-auto max-w-screen-xl pb-4 px-4 sm:px-8'>
+      <section className='mt-10 md:mt-24 mx-auto max-w-screen-xl pb-4 px-4 sm:px-8'>
         <div className='text-center space-y-4'>
           <h1 className='text-gray-800 font-bold text-4xl md:text-5xl dark:text-slate-200'>
             Potencia la visibilidad de tu
@@ -24,10 +24,10 @@ export function Hero() {
             motores de búsqueda. Aumenta tu posicionamiento y atrae a más usuarios con una estrategia SEO efectiva.
           </p>
         </div>
-        <div className='mt-12 justify-center items-center space-y-3 sm:space-x-6 sm:space-y-0 sm:flex'>
+        <div className='mt-4 md:mt-12 justify-center items-center space-y-3 sm:space-x-6 sm:space-y-0 flex'>
           <a
             href='/validar-seo'
-            className='px-10 py-3.5 w-full bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 text-center rounded-md shadow-md block sm:w-auto transition-colors'
+            className='px-5 py-2.5 md:px-10 md:py-3.5 w-1/3 bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 text-center rounded-md shadow-md block sm:w-auto transition-colors'
           >
             Empezar
           </a>
