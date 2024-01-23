@@ -16,7 +16,7 @@ export function Banner() {
     <div
       id='sticky-banner'
       tabIndex={-1}
-      className='fixed bottom-0 start-0 z-50 flex justify-between w-full p-4 border-t border-gray-400 bg-slate-300 dark:bg-blue-950 dark:border-gray-800'
+      className='fixed bottom-0 start-0 z-50 flex justify-between px-2 py-2 w-full md:p-4 border-t border-gray-400 bg-slate-300 dark:bg-blue-950 dark:border-gray-800'
     >
       <div className='flex items-center mx-auto'>
         <p className='flex items-center text-sm font-normal text-gray-800 dark:text-slate-200'>
@@ -44,7 +44,7 @@ export function Banner() {
           </span>
         </p>
       </div>
-      <div className='flex items-center'>
+      <div className='flex items-center w-24 md:w-auto'>
         <button
           data-dismiss-target='#sticky-banner'
           type='button'
