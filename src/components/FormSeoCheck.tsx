@@ -100,7 +100,7 @@ export function FormSeoCheck() {
 
       {loading && <Loading />}
 
-      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5 w-[700px]'>
+      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5 w-11/12 md:w-[700px]'>
         <label htmlFor='title' className='flex flex-col'>
           <span className='mb-2 text-lg text-slate-800 dark:text-slate-200 font-semibold text-balance'>
             Ingresa un título descriptivo para tu contenido, asegúrate de que sea claro y relevante para mejorar la
@@ -174,7 +174,7 @@ export function FormSeoCheck() {
           <button
             disabled={isSubmitting || errorAI.hasError}
             type='submit'
-            className='px-6 py-3.5  rounded-lg duration-150 bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 active:shadow-lg w-[150px] disabled:opacity-75 disabled:cursor-not-allowed disabled:bg-rose-700'
+            className='h-full px-3 py-2 md:px-6 md:py-3.5  rounded-lg duration-150 bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 active:shadow-lg md:w-[150px] disabled:opacity-75 disabled:cursor-not-allowed disabled:bg-rose-700'
           >
             Validar SEO
           </button>
@@ -183,7 +183,7 @@ export function FormSeoCheck() {
             disabled={validButtonAI || isSubmitting || errorAI.hasError || loading}
             type='button'
             onClick={handleSuggestionsAI({ title, description, keyword })}
-            className='px-6 py-3.5  rounded-lg duration-150 bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 active:shadow-lg w-2/5 disabled:opacity-75 disabled:cursor-not-allowed disabled:bg-rose-700'
+            className='h-full px-3 py-2 md:px-6 md:py-3.5  rounded-lg duration-150 bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 active:shadow-lg md:w-2/5 disabled:opacity-75 disabled:cursor-not-allowed disabled:bg-rose-700'
           >
             Generar sugerencias con AI
           </button>
