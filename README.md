@@ -25,7 +25,7 @@ Require Node.js v20.9.0
 - [x] add events click GA
 - [x] add other tool analytic
 - [x] add metaData
-- [ ] add siteMaps
+- [x] add siteMaps
 - [x] add JSONld microdata
 - [x] add banner info
 - [x] add logo and review metadata
@@ -33,4 +33,5 @@ Require Node.js v20.9.0
 - [x] add footer
 - [x] add recommendations below the form validate SEO
 - [x] deploy app to vercel and config domain
-- [x] add button at the bottom of the page to start or try 
+- [x] add button at the bottom of the page to start or try
+- [ ] add multiple suggestions responses with AI
