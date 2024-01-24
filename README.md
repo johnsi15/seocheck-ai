@@ -26,7 +26,7 @@ Require Node.js v20.9.0
 - [x] add other tool analytic
 - [x] add metaData
 - [ ] add siteMaps
-- [ ] add JSONld microdata
+- [x] add JSONld microdata
 - [x] add banner info
 - [x] add logo and review metadata
 - [x] add favicon
