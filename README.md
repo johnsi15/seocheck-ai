@@ -33,3 +33,4 @@ Require Node.js v20.9.0
 - [x] add footer
 - [x] add recommendations below the form validate SEO
 - [x] deploy app to vercel and config domain
+- [x] add button at the bottom of the page to start or try 
