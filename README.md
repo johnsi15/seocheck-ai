@@ -35,3 +35,4 @@ Require Node.js v20.9.0
 - [x] deploy app to vercel and config domain
 - [x] add button at the bottom of the page to start or try
 - [ ] add multiple suggestions responses with AI
+- [ ] add response with a range from 1 to 10 how good the title is with AI.
