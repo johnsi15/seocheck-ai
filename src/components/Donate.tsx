@@ -5,7 +5,7 @@ export function Donate() {
         <div className='mx-auto max-w-screen-sm text-center'>
           <h2 className='mb-4 text-4xl tracking-tight font-extrabold leading-tight text-gray-900 dark:text-slate-200'>
             Apóyanos contribuye para mantener y mejorar la herramienta{' '}
-            <strong className='text-rose-700 dark:text-rose-600 font-semibold'>SEO CheckAI</strong>
+            <strong className='text-rose-700 dark:text-rose-600 font-semibold'>seocheckai</strong>
           </h2>
           <p className='mb-7 font-normal text-black dark:text-slate-400 md:text-lg tracking-wide'>
             Si te gusta nuestra herramienta de validación de SEO y encuentras valor en ella, considera hacer una{' '}

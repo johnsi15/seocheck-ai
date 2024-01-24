@@ -66,13 +66,14 @@ export async function GET() {
     title: 'OpenAI',
   }
 
-  return Response.json({ data })
+  return Response.json({ data, status: 200 })
 }
 
 export async function POST(req: Request) {
   const { title, description, keyword } = await req.json()
   const keywords = keyword ?? ''
 
+  // también se puede controlar el error acá con un try catch
   const messageSuggestions = await suggestions({ title, description, keywords })
 
   // return new StreamingTextResponse(stream)
