@@ -1,7 +1,9 @@
 'use client'
 
-import React, { ReactElement, useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
 import { type PlyrOptions, type PlyrSource } from 'plyr-react'
+
+const Plyr = dynamic(() => import('plyr-react'), { ssr: false })
 import 'plyr-react/plyr.css'
 import '@/styles/video.css'
 
@@ -29,17 +31,5 @@ const plyrProps: PlyrProps = {
 }
 
 export function Video() {
-  const [importedComponent, setImportedComponent] = useState<ReactElement | null>(null)
-
-  useEffect(() => {
-    const importComponent = async () => {
-      const myModule = await import('plyr-react')
-      const Plyr = myModule.default
-      setImportedComponent(<Plyr {...plyrProps} />)
-    }
-
-    importComponent()
-  }, [])
-
-  return <section className='aspect-video md:mx-16 md:mt-20 md:mb-28'>{importedComponent}</section>
+  return <section className='aspect-video md:mx-16 md:mt-20 md:mb-28'>{<Plyr {...plyrProps} />}</section>
 }
