@@ -3,12 +3,6 @@ import { openai } from '@ai-sdk/openai'
 
 export const runtime = 'edge'
 
-interface SeoData {
-  title: string
-  description: string
-  keywords: string[]
-}
-
 if (!process.env.OPENAI_API_KEY) {
   throw new Error('OPENAI_API_KEY environment variable is required.')
 }
