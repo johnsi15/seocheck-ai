@@ -13,7 +13,7 @@ if (!process.env.OPENAI_API_KEY) {
   throw new Error('OPENAI_API_KEY environment variable is required.')
 }
 
-const messages: CoreMessage[] = [
+const defaultMessages: CoreMessage[] = [
   {
     role: 'system',
     content:
@@ -45,10 +45,10 @@ const messages: CoreMessage[] = [
   },
 ]
 
-async function suggestions({ title, description, keywords }: SeoData) {
+async function suggestions({ messages }: { messages: CoreMessage[] }) {
   const result = await streamText({
     model: openai('gpt-3.5-turbo'),
-    messages: [...messages],
+    messages: [...defaultMessages, ...messages],
     temperature: 0.75,
   })
 
@@ -65,11 +65,9 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const { title, description, keyword } = await req.json()
-  const keywords = keyword ?? ''
+  const { messages }: { messages: CoreMessage[] } = await req.json()
 
-  // también se puede controlar el error acá con un try catch
-  const messageSuggestions = await suggestions({ title, description, keywords })
+  const messageSuggestions = await suggestions({ messages })
 
   return messageSuggestions.toAIStreamResponse()
 }

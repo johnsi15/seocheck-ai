@@ -15,7 +15,7 @@ export function Suggestions({ data, active = true }: Props) {
   }
 
   if (data?.content && data.content.length > 0) {
-    const [title, description, keywords] = data.content.split(':')
+    const [title, description, keywords] = data.content.split('\n')
 
     return (
       <section
@@ -36,7 +36,7 @@ export function Suggestions({ data, active = true }: Props) {
             <textarea
               disabled
               rows={2}
-              value={title}
+              value={title.split(':')[1]}
               className={`w-full pl-5 pr-3 py-2   outline-none border  shadow-sm rounded-lg resize-none bg-transparent text-slate-200 dark:text-slate-300  border-blue-500`}
             ></textarea>
             <button
@@ -54,7 +54,7 @@ export function Suggestions({ data, active = true }: Props) {
             <textarea
               disabled
               rows={3}
-              value={description}
+              value={description.split(':')[1]}
               className={`w-full pl-5 pr-3 py-2   outline-none border  shadow-sm rounded-lg resize-none bg-transparent text-slate-200 dark:text-slate-300  border-blue-500`}
             ></textarea>
             <button
@@ -72,7 +72,7 @@ export function Suggestions({ data, active = true }: Props) {
             <input
               type='text'
               disabled
-              value={keywords}
+              value={keywords.split(':')[1]}
               className={`w-full pl-5 pr-3 py-2   outline-none border  shadow-sm rounded-lg resize-none bg-transparent text-slate-200 dark:text-slate-300  border-blue-500`}
             />
           )}
