@@ -5,10 +5,9 @@ import { useLogger } from 'next-axiom'
 import { SeoCheck, seoCheckSchema } from '@/lib/types'
 import { ErrorsMessage, ErrorsSuccess } from './ErrorsSuccess'
 import { Suggestions } from './Suggestions'
-import { useDataSeoAi } from '@/hooks/useDataSeoAi'
+// import { useDataSeoAi } from '@/hooks/useDataSeoAi'
 import { Loading } from './Loading'
 import { useChat } from 'ai/react'
-import { MouseEventHandler } from 'react'
 
 export function FormSeoCheck() {
   const {
@@ -24,15 +23,8 @@ export function FormSeoCheck() {
   })
 
   // const { handleSuggestionsAI, suggestionsIa, errorAI, loading } = useDataSeoAi()
-  const { messages, append } = useChat()
-  console.log({ messages })
+  const { messages, append, isLoading, error, reload } = useChat({ keepLastMessageOnError: true })
 
-  const suggestionsIa = {}
-  const errorAI = {
-    hasError: false,
-    message: 'Algo salio mal...',
-  }
-  const loading = false
   const handleSuggestionsAI = () => {
     console.log('handleSuggestionsAI')
 
@@ -96,26 +88,22 @@ export function FormSeoCheck() {
 
   return (
     <>
-      {messages.length > 0 ? (
-        <Suggestions data={messages[1]} />
-      ) : (
+      {!error && messages.length > 0 && <Suggestions data={messages} />}
+
+      {error && (
         <div className='mb-5 flex flex-col items-center justify-center gap-4'>
-          <p className='text-lg dark:text-slate-200 text-pretty w-[700px]'>
-            Oops, algo salió mal al tratar de generar las sugerencias con inteligencia artificial.{' '}
-            <strong className='dark:text-rose-600 text-rose-700'>{errorAI.message}</strong>
-          </p>
-          <a
-            href='/validar-seo'
-            className='relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-rose-700 to-rose-700 group-hover:from-rose-700 group-hover:to-rose-700 hover:text-slate-200 dark:text-slate-200 focus:ring-2 focus:outline-none'
+          <p className='text-lg dark:text-slate-200 text-pretty w-[700px]'>Oops, Algo salió mal. 😣</p>
+          <button
+            type='button'
+            className='relative inline-flex items-center justify-center px-2 py-3 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-rose-700 to-rose-700 group-hover:from-rose-700 group-hover:to-rose-700 hover:text-slate-200 dark:text-slate-200 focus:ring-2 focus:outline-none'
+            onClick={() => reload()}
           >
-            <span className='relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0'>
-              Intenta con otro título y descripción
-            </span>
-          </a>
+            Intentar de nuevo
+          </button>
         </div>
       )}
 
-      {loading && <Loading />}
+      {isLoading && <Loading />}
 
       <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5 w-full md:w-[700px]'>
         <label htmlFor='title' className='flex flex-col'>
@@ -191,7 +179,7 @@ export function FormSeoCheck() {
 
         <div className='flex gap-3'>
           <button
-            disabled={isSubmitting || errorAI.hasError}
+            disabled={isSubmitting || error != null}
             type='submit'
             className='h-full px-3 py-2 md:px-6 md:py-3.5  rounded-lg duration-150 bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 active:shadow-lg md:w-[150px] disabled:opacity-75 disabled:cursor-not-allowed disabled:bg-rose-700'
           >
@@ -199,7 +187,7 @@ export function FormSeoCheck() {
           </button>
 
           <button
-            disabled={validButtonAI || isSubmitting || errorAI.hasError || loading}
+            disabled={validButtonAI || isSubmitting || error != null || isLoading}
             type='button'
             onClick={handleSuggestionsAI}
             className='h-full px-3 py-2 md:px-6 md:py-3.5  rounded-lg duration-150 bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 active:shadow-lg md:w-2/5 disabled:opacity-75 disabled:cursor-not-allowed disabled:bg-rose-700'
