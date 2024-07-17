@@ -7,6 +7,8 @@ import { ErrorsMessage, ErrorsSuccess } from './ErrorsSuccess'
 import { Suggestions } from './Suggestions'
 import { useDataSeoAi } from '@/hooks/useDataSeoAi'
 import { Loading } from './Loading'
+import { useChat } from 'ai/react'
+import { MouseEventHandler } from 'react'
 
 export function FormSeoCheck() {
   const {
@@ -21,7 +23,22 @@ export function FormSeoCheck() {
     resolver: zodResolver(seoCheckSchema),
   })
 
-  const { handleSuggestionsAI, suggestionsIa, errorAI, loading } = useDataSeoAi()
+  // const { handleSuggestionsAI, suggestionsIa, errorAI, loading } = useDataSeoAi()
+  const { messages, append } = useChat()
+  console.log({ messages })
+
+  const suggestionsIa = {}
+  const errorAI = {
+    hasError: false,
+    message: 'Algo salio mal...',
+  }
+  const loading = false
+  const handleSuggestionsAI = () => {
+    console.log('handleSuggestionsAI')
+
+    append({ content: `Title: ${title}\nDescription: ${description}\nKeywords: ${keyword}`, role: 'user' })
+  }
+
   const log = useLogger()
 
   const onSubmit = (data: SeoCheck) => {
@@ -79,8 +96,8 @@ export function FormSeoCheck() {
 
   return (
     <>
-      {!errorAI.hasError ? (
-        <Suggestions data={suggestionsIa} />
+      {messages.length > 0 ? (
+        <Suggestions data={messages[1]} />
       ) : (
         <div className='mb-5 flex flex-col items-center justify-center gap-4'>
           <p className='text-lg dark:text-slate-200 text-pretty w-[700px]'>
@@ -111,6 +128,7 @@ export function FormSeoCheck() {
               id='title'
               type='text'
               placeholder='Título'
+              defaultValue='Cúcuta tendrá gran desfile en conmemoración al Día de la Independencia de Colombia'
               className={`w-full pl-5 pr-3 py-2 outline-none border shadow-sm rounded-lg ${
                 errors.title
                   ? 'bg-red-50 border-red-500 text-red-800 focus:border-red:500 dark:bg-red-100'
@@ -137,6 +155,7 @@ export function FormSeoCheck() {
               id='description'
               rows={3}
               placeholder='Descripción'
+              defaultValue='El desfile iniciará en el Puente Benito Hernández y se hará un ensayo previo al evento en los próximos días.'
               className={`w-full pl-5 pr-3 py-2   outline-none border  shadow-sm rounded-lg resize-none ${
                 errors.description
                   ? 'bg-red-50 border-red-500 text-red-800 focus:border-red:500 dark:bg-red-100'
@@ -182,7 +201,7 @@ export function FormSeoCheck() {
           <button
             disabled={validButtonAI || isSubmitting || errorAI.hasError || loading}
             type='button'
-            onClick={handleSuggestionsAI({ title, description, keyword })}
+            onClick={handleSuggestionsAI}
             className='h-full px-3 py-2 md:px-6 md:py-3.5  rounded-lg duration-150 bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 active:shadow-lg md:w-2/5 disabled:opacity-75 disabled:cursor-not-allowed disabled:bg-rose-700'
           >
             Generar sugerencias con AI
