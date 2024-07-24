@@ -31,8 +31,6 @@ export function FormSeoCheck() {
     append({ content: `Title: ${title}\nDescription: ${description}\nKeywords: ${keyword}`, role: 'user' })
   }
 
-  console.log({ messages })
-
   const log = useLogger()
 
   const onSubmit = (data: SeoCheck) => {
