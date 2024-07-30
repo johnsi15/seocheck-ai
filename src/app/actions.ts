@@ -15,5 +15,6 @@ export async function validateUrl(prevState: any, formData: FormData) {
     return { message: 'Por favor ingrese una URL valida' }
   }
 
+  // console.log('ok...')
   redirect(`/auditar-seo?url=${url}`)
 }
