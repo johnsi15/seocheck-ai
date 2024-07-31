@@ -13,17 +13,63 @@ export default async function AuditSeo({
     return <InvalidWebAudit />
   }
 
-  const { score } = await webScraping({ url })
+  const { score, issues } = await webScraping({ url })
 
-  const listRevision = [
-    'Título',
-    'Descripción',
-    'H1',
-    'H2',
-    'Alt en la imágenes',
-    'Enlaces internos',
-    'Marcado de esquema',
-  ]
+  type IssueDetail = {
+    value: string
+    description: string
+    solution: string
+  }
+
+  const listIssues: Record<string, IssueDetail> = {
+    title: {
+      value: 'Título',
+      description: 'El título de la página es muy largo o muy corto.',
+      solution: 'Ajusta el título de la página para que sea lo más descriptivo posible.',
+    },
+    titleLength: {
+      value: 'Título largo',
+      description: 'El título de la página es muy largo o muy corto.',
+      solution: 'Ajusta el título de la página para que sea lo más descriptivo posible.',
+    },
+    titles: {
+      value: 'Títulos',
+      description: `Tienes más de una etiqueta de title. Se encontraron ${
+        issues.find(item => item.key.includes('titles'))?.count
+      } títulos.`,
+      solution: 'Se recomienda tener solo una etiqueta de título en una página.',
+    },
+    description: {
+      value: 'Descripción',
+      description: 'La descripción de la página es muy larga o muy corta.',
+      solution: 'Ajusta la descripción de la página para que sea lo más descriptivo posible.',
+    },
+    h1: {
+      value: 'H1',
+      description: 'El encabezado H1 no es adecuado para la página.',
+      solution: 'Ajusta el encabezado H1 para que sea lo más descriptivo posible.',
+    },
+    h2: {
+      value: 'H2',
+      description: 'El encabezado H2 no es adecuado para la página.',
+      solution: 'Ajusta el encabezado H2 para que sea lo más descriptivo posible.',
+    },
+    alt: {
+      value: 'Alt en la imágenes',
+      description: 'Las imágenes no tienen atributos alt.',
+      solution: 'Agrega atributos alt a las imágenes para mejorar la accesibilidad.',
+    },
+    internalLinks: {
+      value: 'Enlaces internos',
+      description: 'Los enlaces internos no están optimizados.',
+      solution: 'Optimiza los enlaces internos para mejorar la accesibilidad.',
+    },
+    schemaMarkup: {
+      value: 'Marcado de esquema',
+      description: 'El marcado de esquema no es adecuado para la página.',
+      solution: 'Ajusta el marcado de esquema para mejorar la accesibilidad.',
+    },
+  }
 
   return (
     <>
@@ -67,12 +113,59 @@ export default async function AuditSeo({
           <p className='mt-2'>Puntuación de SEO en la página</p>
         </div>
 
-        <div>
-          Se reviso:
-          <ul>
-            {listRevision.map(item => (
-              <li key={item}>{item}</li>
-            ))}
+        <div className='bg-blue-100 dark:bg-transparent dark:border dark:border-blue-500 w-full min-h-max rounded px-7 py-5 mt-12'>
+          <span className='text-slate-800 dark:text-white text-2xl'>Problemas</span>
+          <ul className='mt-5 flex flex-col gap-5'>
+            {issues.map(({ issue, key, detail }) => {
+              if (!issue) return
+
+              console.log({ issue, key, detail })
+              // console.log(listIssues[key])
+              return (
+                <li key={key} className=''>
+                  <h3 className='font-medium leading-6 text-slate-800 dark:text-white capitalize'>
+                    {listIssues[key].value}
+                  </h3>
+                  {key === 'titles' && Array.isArray(detail) && (
+                    <div className='mt-1 flex flex-col rounded-md shadow-sm px-2 py-2 break-all max-h-28 overflow-scroll whitespace-pre-line border border-red-600 bg-transparent'>
+                      {detail.map((item, index) => (
+                        <div key={index}>{String(item)}</div>
+                      ))}
+                    </div>
+                  )}
+
+                  {key === 'images' && Array.isArray(detail) && (
+                    <div className='mt-1 flex rounded-md shadow-sm px-2 py-2 break-all max-h-28 overflow-scroll whitespace-pre-line border border-red-600 bg-transparent'>
+                      {detail.map((item, index) => (
+                        <div key={index}>
+                          {item?.src ? item.src : null}
+                          {item?.alt ? item.alt : null}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {key === 'links' && Array.isArray(detail) && (
+                    <div className='mt-1 flex rounded-md shadow-sm px-2 py-2 break-all max-h-28 overflow-scroll whitespace-pre-line border border-red-600 bg-transparent'>
+                      {detail.map((item, index) => (
+                        <div key={index}>
+                          {item.href ? item.href : null}
+                          {item.text ? item.text : null}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {typeof detail === 'string' && (
+                    <div className='mt-1 flex rounded-md shadow-sm px-2 py-2 break-all max-h-28 overflow-scroll whitespace-pre-line border border-red-600 bg-transparent'>
+                      {detail}
+                    </div>
+                  )}
+
+                  <div className='text-red-600 mt-2'>{listIssues[key].solution}</div>
+                </li>
+              )
+            })}
           </ul>
         </div>
       </main>

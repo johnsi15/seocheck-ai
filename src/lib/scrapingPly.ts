@@ -70,19 +70,19 @@ export async function webScraping({ url }: { url: string }) {
 
   if (!title) score -= 5
 
-  if (titleLength > 80 || titleLength < 55) {
-    score -= 3
-  }
+  if (titleLength > 80 || titleLength < 55) score -= 3
+
+  console.log({ titleLength, descriptionLength })
 
   if (titles.length > 0) score -= 3
 
-  if (!description) score -= 5
+  if (description.includes('No description found')) score -= 5
 
   if (descriptionLength > 160 || descriptionLength < 119) {
     score -= 3
   }
 
-  if (!h1) score -= 5
+  if (h1.includes('No H1 found')) score -= 5
 
   images.forEach(img => {
     if (img.alt.includes('No alt attribute')) score -= 3
@@ -109,7 +109,72 @@ export async function webScraping({ url }: { url: string }) {
 
   console.log('Score:', score)
 
+  const issues = [
+    {
+      key: 'title',
+      issue: !title,
+      detail: title,
+    },
+    {
+      key: 'titleLength',
+      issue: titleLength > 80 || titleLength < 55,
+      detail: titleLength,
+    },
+    {
+      key: 'titles',
+      issue: titles.length > 0,
+      detail: titles,
+      count: titles.length,
+    },
+    {
+      key: 'description',
+      issue: description.includes('No description found'),
+      detail: description,
+    },
+    {
+      key: 'descriptionLength',
+      issue: descriptionLength > 160 || descriptionLength < 119,
+      detail: descriptionLength,
+    },
+    {
+      key: 'h1',
+      issue: h1.includes('No H1 found'),
+    },
+    {
+      key: 'h2',
+      issue: h2.includes('No H2 found'),
+    },
+    {
+      key: 'images',
+      issue: images.some(img => img.alt.includes('No alt attribute')),
+      detail: images.filter(img => img.alt.includes('No alt attribute')),
+    },
+    {
+      key: 'links',
+      issue: countLinks <= 0 || countLinks <= 3,
+      detail: links,
+    },
+    {
+      key: 'schemaMarkup',
+      issue: !schemaMarkup,
+    },
+  ]
+
   return {
     score,
+    issues,
+    data: {
+      title,
+      description,
+      h1,
+      h2,
+      images,
+      links,
+      schemaMarkup,
+      OGtitle,
+      OGdescription,
+      OGimage,
+      OGurl,
+    },
   }
 }
