@@ -1,6 +1,7 @@
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
 import { InvalidWebAudit } from '@/components/InvalidWebAudit'
+import { ScrollToTop } from '@/components/ScrollToTop'
 import { WebAuditForm } from '@/components/WebAuditForm'
 import { webScraping } from '@/lib/scrapingPly'
 
@@ -99,6 +100,7 @@ export default async function AuditSeo({
 
   return (
     <>
+      <ScrollToTop />
       <Header />
       <main className='flex flex-col items-center pt-16 pb-10 px-4 md:px-0 w-full md:m-auto md:w-[700px]'>
         <h1 className='text-4xl dark:text-slate-200 mb-10 text-center'>
@@ -193,7 +195,7 @@ export default async function AuditSeo({
           </div>
         </header>
 
-        <div className='bg-blue-100 dark:bg-transparent dark:border dark:border-blue-500 w-full min-h-max rounded px-7 py-5 mt-12'>
+        <div className='bg-slate-200 dark:bg-transparent dark:border dark:border-blue-500 w-full min-h-max rounded px-7 py-5 mt-12'>
           <span className='text-slate-800 dark:text-white text-2xl'>Problemas</span>
           <ul className='mt-5 flex flex-col gap-7'>
             {issues.map(({ issue, key, detail }) => {
@@ -207,7 +209,7 @@ export default async function AuditSeo({
                     {issuesDescription[key].value}
                   </h3>
                   {key === 'titles' && Array.isArray(detail) && (
-                    <div className='mt-1 flex flex-col rounded-md shadow-sm px-2 py-2 break-all max-h-28 overflow-scroll whitespace-pre-line border border-red-600 bg-transparent'>
+                    <div className='mt-1 flex flex-col rounded-md shadow-sm px-2 py-2 break-all max-h-28 overflow-scroll whitespace-pre-line border border-red-600 dark:bg-white dark:bg-transparent'>
                       {detail.map((item, index) => (
                         <div key={index}>{String(item)}</div>
                       ))}
@@ -215,7 +217,7 @@ export default async function AuditSeo({
                   )}
 
                   {key === 'images' && Array.isArray(detail) && (
-                    <div className='mt-1 flex rounded-md shadow-sm px-2 py-2 break-all max-h-28 overflow-scroll whitespace-pre-line border border-red-600 bg-transparent'>
+                    <div className='mt-1 flex rounded-md shadow-sm px-2 py-2 break-all max-h-28 overflow-scroll whitespace-pre-line border border-red-600 bg-white dark:bg-transparent'>
                       {detail.map((item, index) => (
                         <ul key={index}>
                           {isImageDetail(item) && (
@@ -229,7 +231,7 @@ export default async function AuditSeo({
                   )}
 
                   {key === 'links' && Array.isArray(detail) && (
-                    <div className='mt-1 flex rounded-md shadow-sm px-2 py-2 break-all max-h-28 overflow-scroll whitespace-pre-line border border-red-600 bg-transparent'>
+                    <div className='mt-1 flex rounded-md shadow-sm px-2 py-2 break-all max-h-28 overflow-scroll whitespace-pre-line border border-red-600 bg-white dark:bg-transparent'>
                       {detail.map((item, index) => (
                         <ul key={index}>
                           {isLinkDetail(item) && (
@@ -243,7 +245,7 @@ export default async function AuditSeo({
                   )}
 
                   {typeof detail === 'string' && (
-                    <div className='mt-1 flex rounded-md shadow-sm px-2 py-2 break-all max-h-28 overflow-scroll whitespace-pre-line border border-red-600 bg-transparent'>
+                    <div className='mt-1 flex rounded-md shadow-sm px-2 py-2 break-all max-h-28 overflow-scroll whitespace-pre-line border border-red-600 bg-white dark:bg-transparent'>
                       {detail}
                     </div>
                   )}

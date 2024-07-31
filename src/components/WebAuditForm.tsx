@@ -3,17 +3,35 @@
 import { useFormState } from 'react-dom'
 import { validateUrl } from '@/app/actions'
 import { SubmitButton } from '@/components/SubmitButton'
+import { useEffect, useRef } from 'react'
+import { usePathname } from 'next/navigation'
 
 const initialState = {
   message: '',
+  error: false,
   url: null,
 }
 
 export function WebAuditForm() {
   const [state, formAction] = useFormState(validateUrl, initialState)
+  const formRef = useRef<HTMLFormElement>(null)
+
+  const pathname = usePathname()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
 
   return (
-    <form action={formAction} className='flex flex-col gap-4 items-center max-w-md w-full m-auto relative'>
+    <form
+      ref={formRef}
+      action={async formData => {
+        formAction(formData)
+
+        formRef.current?.reset()
+      }}
+      className='flex flex-col items-center max-w-md w-full m-auto relative'
+    >
       <input
         type='text'
         name='site'
@@ -21,7 +39,7 @@ export function WebAuditForm() {
         placeholder='https://johnserrano.co'
         required
       />
-      {state?.message && <p className='text-red-600 text-base mt-3'>{state.message}</p>}
+      {state?.message && <p className='text-red-600 text-base my-3'>{state.message}</p>}
 
       <SubmitButton />
     </form>

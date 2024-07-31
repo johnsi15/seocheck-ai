@@ -9,10 +9,10 @@ export async function validateUrl(prevState: any, formData: FormData) {
 
   const url = rawFormData.site as string
 
-  if (!url) return { message: 'Por favor ingrese una URL', url: null }
+  if (!url) return { message: 'Por favor ingrese una URL', url: null, error: true }
 
   if (!url.startsWith('https://')) {
-    return { message: 'Por favor ingrese una URL valida', url: null }
+    return { message: 'Por favor ingrese una URL valida', url: null, error: true }
   }
 
   redirect(`/auditar-seo?url=${encodeURIComponent(url)}`)
