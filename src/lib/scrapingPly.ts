@@ -50,7 +50,7 @@ export async function webScraping({ url }: { url: string }) {
   )
 
   const schemaMarkup = await page.$$eval('script[type="application/ld+json"]', scripts =>
-    scripts.map(script => script.innerText)
+    scripts.map(script => script.textContent)
   )
 
   // console.log('Title:', title)
