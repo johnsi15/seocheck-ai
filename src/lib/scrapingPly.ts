@@ -6,7 +6,7 @@ export async function webScraping({ url }: { url: string }) {
   })
 
   const page = await browser.newPage()
-  await page.goto(url)
+  await page.goto(url, { timeout: 60000 })
 
   const title = await page.title()
 
@@ -74,7 +74,7 @@ export async function webScraping({ url }: { url: string }) {
 
   console.log({ titleLength, descriptionLength })
 
-  if (titles.length > 0) score -= 3
+  if (titles.length > 1) score -= 3
 
   if (description.includes('No description found')) score -= 5
 
@@ -123,7 +123,7 @@ export async function webScraping({ url }: { url: string }) {
     },
     {
       key: 'titles',
-      issue: titles.length > 0,
+      issue: titles.length > 1,
       detail: titles,
       count: titles.length,
     },
@@ -135,15 +135,18 @@ export async function webScraping({ url }: { url: string }) {
     {
       key: 'descriptionLength',
       issue: descriptionLength > 160 || descriptionLength < 119,
-      detail: descriptionLength,
+      detail: description,
+      count: descriptionLength,
     },
     {
       key: 'h1',
       issue: h1.includes('No H1 found'),
+      detail: h1,
     },
     {
       key: 'h2',
       issue: h2.includes('No H2 found'),
+      detail: h2,
     },
     {
       key: 'images',
@@ -151,13 +154,15 @@ export async function webScraping({ url }: { url: string }) {
       detail: images.filter(img => img.alt.includes('No alt attribute')),
     },
     {
-      key: 'links',
+      key: 'internalLinks',
       issue: countLinks <= 0 || countLinks <= 3,
       detail: links,
+      count: countLinks,
     },
     {
       key: 'schemaMarkup',
       issue: !schemaMarkup,
+      detail: 'No schema found',
     },
   ]
 
