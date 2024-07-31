@@ -1,12 +1,13 @@
 .container {
   --uib-size: 55px;
-  --uib-color: white;
+  --uib-color: #cf364c;
   --uib-speed: 1.3s;
   --uib-bg-opacity: .1;
   height: calc(var(--uib-size) * (2.1 / 5));
   width: var(--uib-size);
   transform-origin: center;
   overflow: visible;
+  margin-top: 10px;
 }
 
 .car {
