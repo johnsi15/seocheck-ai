@@ -118,7 +118,8 @@ export async function webScraping({ url }: { url: string }) {
     {
       key: 'titleLength',
       issue: titleLength > 80 || titleLength < 55,
-      detail: titleLength,
+      detail: title,
+      count: titleLength,
     },
     {
       key: 'titles',

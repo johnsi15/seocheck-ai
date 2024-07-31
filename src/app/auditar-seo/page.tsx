@@ -30,14 +30,16 @@ export default async function AuditSeo({
     titleLength: {
       value: 'Título largo',
       description: 'El título de la página es muy largo o muy corto.',
-      solution: 'Ajusta el título de la página para que sea lo más descriptivo posible.',
+      solution: `Ajusta el título de la página. Tiene ${
+        issues.find(item => item.key.includes('titleLength'))?.count
+      } caracteres.`,
     },
     titles: {
       value: 'Títulos',
-      description: `Tienes más de una etiqueta de title. Se encontraron ${
+      description: `Tienes más de una etiqueta de title.`,
+      solution: `Se recomienda tener solo una etiqueta de título en una página. Se encontraron ${
         issues.find(item => item.key.includes('titles'))?.count
       } títulos.`,
-      solution: 'Se recomienda tener solo una etiqueta de título en una página.',
     },
     description: {
       value: 'Descripción',
