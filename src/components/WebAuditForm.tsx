@@ -3,8 +3,7 @@
 import { useFormState } from 'react-dom'
 import { validateUrl } from '@/app/actions'
 import { SubmitButton } from '@/components/SubmitButton'
-import { useEffect, useRef } from 'react'
-import { usePathname } from 'next/navigation'
+import { useRef } from 'react'
 
 const initialState = {
   message: '',
@@ -15,12 +14,6 @@ const initialState = {
 export function WebAuditForm() {
   const [state, formAction] = useFormState(validateUrl, initialState)
   const formRef = useRef<HTMLFormElement>(null)
-
-  const pathname = usePathname()
-
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [pathname])
 
   return (
     <form
