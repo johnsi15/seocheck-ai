@@ -23,7 +23,7 @@ export function FormSeoCheck() {
   })
 
   // const { handleSuggestionsAI, suggestionsIa, errorAI, loading } = useDataSeoAi()
-  const { messages, append, isLoading, error, reload } = useChat({ keepLastMessageOnError: true })
+  const { messages, append, isLoading, error, reload } = useChat({ api: '/api/chat', keepLastMessageOnError: true })
 
   const handleSuggestionsAI = () => {
     console.log('handleSuggestionsAI')
