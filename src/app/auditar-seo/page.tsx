@@ -5,6 +5,7 @@ import { ScrollToTop } from '@/components/ScrollToTop'
 import { SeoAuditSuggestions } from '@/components/SeoAuditSuggestions'
 import { WebAuditForm } from '@/components/WebAuditForm'
 import { webScraping } from '@/lib/scrapingPly'
+import { issuesDescription } from '@/lib/consts'
 
 export default async function AuditSeo({
   searchParams,
@@ -19,74 +20,7 @@ export default async function AuditSeo({
 
   const { score, issues, data } = await webScraping({ url })
 
-  type IssueDetail = {
-    value: string
-    description: string
-    solution: string
-  }
-
-  const issuesDescription: Record<string, IssueDetail> = {
-    title: {
-      value: 'Título',
-      description:
-        'Falta la etiqueta `<title>` en el HTML de la página. Esta etiqueta es crucial para el SEO ya que define el título que aparece en la pestaña del navegador y en los resultados de búsqueda.',
-      solution:
-        'Agrega una etiqueta `<title>` en el `<head>` del HTML con un título descriptivo y relevante para la página.',
-    },
-    titleLength: {
-      value: 'Título largo',
-      description: 'El título de la página es muy largo o muy corto.',
-      solution: `Ajusta el título de la página. Tiene ${
-        issues.find(item => item.key.includes('titleLength'))?.count
-      } caracteres. Se recomienda que tenga entre 55 a 80 caracteres.`,
-    },
-    titles: {
-      value: 'Títulos',
-      description: `Tienes más de una etiqueta de title.`,
-      solution: `Se recomienda tener solo una etiqueta de título en una página. Se encontraron ${
-        issues.find(item => item.key.includes('titles'))?.count
-      } títulos.`,
-    },
-    description: {
-      value: 'Descripción',
-      description:
-        'La etiqueta `<meta name="description">` está ausente en el HTML de la página. Esta metaetiqueta proporciona una breve descripción del contenido de la página, la cual puede ser utilizada por los motores de búsqueda en los resultados de búsqueda y en las redes sociales.',
-      solution:
-        'Agrega una etiqueta `<meta name="description" content="Descripción breve y relevante del contenido de la página.">` en el `<head>` del HTML.',
-    },
-    descriptionLength: {
-      value: 'Descripción larga',
-      description: 'La descripción de la página es muy larga o muy corta.',
-      solution: `Ajusta la descripción de la página. Tiene ${
-        issues.find(item => item.key.includes('descriptionLength'))?.count
-      } caracteres. Se recomienda que tenga entre 120 y 160 caracteres.`,
-    },
-    h1: {
-      value: 'H1',
-      description: 'El encabezado H1 no es adecuado para la página.',
-      solution: 'Agrega una etiqueta `<h1>` en el cuerpo de la página.',
-    },
-    h2: {
-      value: 'H2',
-      description: 'El encabezado H2 no es adecuado para la página.',
-      solution: 'Agrega una etiqueta `<h2>` en el cuerpo de la página.',
-    },
-    images: {
-      value: 'Alt en la imágenes',
-      description: 'Las imágenes no tienen atributos alt.',
-      solution: 'Agrega atributos alt a las imágenes para mejorar la accesibilidad.',
-    },
-    internalLinks: {
-      value: 'Enlaces internos',
-      description: 'Los enlaces internos no están optimizados.',
-      solution: 'Optimiza los enlaces internos para mejorar la accesibilidad.',
-    },
-    schemaMarkup: {
-      value: 'Marcado de esquema',
-      description: 'El marcado de esquema no es adecuado para la página.',
-      solution: 'Ajusta el marcado de esquema para mejorar la accesibilidad.',
-    },
-  }
+  const issueDescriptionData = issuesDescription(issues)
 
   type ImageDetail = { src: string; alt: string }
   type LinkDetail = { href: string; text: string }
@@ -108,7 +42,7 @@ export default async function AuditSeo({
           Audita el <span className='dark:text-rose-600 text-rose-700'>SEO</span> de tu sitio web 🔥
         </h1>
 
-        <header className='flex items-center flex-col'>
+        <header className='flex items-center flex-col w-60'>
           <h2 className='text-center text-2xl font-light mb-3'>{url}</h2>
           <div className='relative size-40'>
             <svg className='rotate-[135deg] size-full' viewBox='0 0 36 36' xmlns='http://www.w3.org/2000/svg'>
@@ -187,7 +121,7 @@ export default async function AuditSeo({
               </svg>
               <div
                 role='tooltip'
-                className='tooltip absolute z-10 invisible w-60 inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 pointer-events-none select-none -top-28 left-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-300'
+                className='tooltip absolute z-10 invisible w-60 inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 pointer-events-none select-none -left-44 top-6 md:-top-28 md:left-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-300'
               >
                 Solo se consideran problemas individuales para el puntaje. Por ejemplo, cada imagen sin atributo alt se
                 cuenta como un problema.
@@ -202,12 +136,10 @@ export default async function AuditSeo({
             {issues.map(({ issue, key, detail }) => {
               if (!issue) return
 
-              console.log({ issue, key, detail })
-              // console.log(issuesDescription[key])
               return (
                 <li key={key} className=''>
                   <h3 className='font-medium leading-6 text-slate-800 dark:text-white capitalize'>
-                    {issuesDescription[key].value}
+                    {issueDescriptionData[key].value}
                   </h3>
                   {key === 'titles' && Array.isArray(detail) && (
                     <div className='mt-1 flex flex-col rounded-md shadow-sm px-2 py-2 break-all max-h-28 overflow-scroll whitespace-pre-line border border-red-600 dark:bg-white dark:bg-transparent'>
@@ -251,7 +183,7 @@ export default async function AuditSeo({
                     </div>
                   )}
 
-                  <div className='text-red-600 mt-2'>{issuesDescription[key].solution}</div>
+                  <div className='text-red-600 mt-2'>{issueDescriptionData[key].solution}</div>
                 </li>
               )
             })}
