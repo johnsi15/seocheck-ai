@@ -1,7 +1,8 @@
 import { Header } from '@/components/Header'
 import { WebAuditForm } from '@/components/WebAuditForm'
+import { Footer } from '@/components/Footer'
 
-export function InvalidWebAudit() {
+export function InvalidWebAudit({ message }: { message: string }) {
   return (
     <>
       <Header />
@@ -9,9 +10,11 @@ export function InvalidWebAudit() {
         <h1 className='text-4xl dark:text-slate-200 mb-10 text-center'>
           Audita el <span className='dark:text-rose-600 text-rose-700'>SEO</span> de tu sitio web 🔥
         </h1>
-        <p className='mb-4 text-lg'>Es necesario una URL</p>
+        <p className='mb-4 text-lg'>{message}</p>
         <WebAuditForm />
       </main>
+
+      <Footer />
     </>
   )
 }

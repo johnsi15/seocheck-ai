@@ -14,8 +14,12 @@ export default async function AuditSeo({
 }) {
   const { url } = searchParams
 
-  if (!url || typeof url !== 'string' || !url.startsWith('https://')) {
-    return <InvalidWebAudit />
+  if (!url) {
+    return <InvalidWebAudit message='Obtén un análisis completo del SEO de tu sitio web' />
+  }
+
+  if (typeof url !== 'string' || !url.startsWith('https://')) {
+    return <InvalidWebAudit message='Es necesario una URL ej: https://johnserrano.co' />
   }
 
   const { score, issues, data } = await webScraping({ url })
@@ -42,7 +46,7 @@ export default async function AuditSeo({
           Audita el <span className='dark:text-rose-600 text-rose-700'>SEO</span> de tu sitio web 🔥
         </h1>
 
-        <header className='flex items-center flex-col w-60'>
+        <header className='flex items-center flex-col max-w-72'>
           <h2 className='text-center text-2xl font-light mb-3'>{url}</h2>
           <div className='relative size-40'>
             <svg className='rotate-[135deg] size-full' viewBox='0 0 36 36' xmlns='http://www.w3.org/2000/svg'>
