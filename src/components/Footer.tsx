@@ -20,6 +20,11 @@ export function Footer() {
               </a>
             </li>
             <li>
+              <a href='/auditar-seo' className='hover:underline me-4 md:me-6'>
+                Analizar web
+              </a>
+            </li>
+            <li>
               <a href='/validar-seo-manual' className='hover:underline me-4 md:me-6'>
                 Validar SEO
               </a>
