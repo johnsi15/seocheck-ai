@@ -292,7 +292,7 @@ const defaultMessages: CoreMessage[] = [
   },
 ]
 
-export async function auditSuggestions({ messages }: { messages: CoreMessage[] }) {
+async function auditSuggestions({ messages }: { messages: CoreMessage[] }) {
   const result = await streamText({
     model: openai('gpt-4o-mini'),
     messages: [...defaultMessages, ...messages],
