@@ -17,19 +17,19 @@ export async function webScraping({ url }: { url: string }) {
     .catch(() => 'No description found')
 
   const OGtitle = await page
-    .$eval('meta[name="og:title"]', (element: HTMLMetaElement) => element.content)
+    .$eval('meta[property="og:title"]', (element: HTMLMetaElement) => element.content)
     .catch(() => 'No og:title found')
 
   const OGdescription = await page
-    .$eval('meta[name="og:description"]', (element: HTMLMetaElement) => element.content)
+    .$eval('meta[property="og:description"]', (element: HTMLMetaElement) => element.content)
     .catch(() => 'No og:description found')
 
   const OGimage = await page
-    .$eval('meta[name="og:image"]', (element: HTMLMetaElement) => element.content)
+    .$eval('meta[property="og:image"]', (element: HTMLMetaElement) => element.content)
     .catch(() => 'No og:image found')
 
   const OGurl = await page
-    .$eval('meta[name="og:url"]', (element: HTMLMetaElement) => element.content)
+    .$eval('meta[property="og:url"]', (element: HTMLMetaElement) => element.content)
     .catch(() => 'No og:url found')
 
   const h1 = await page.$eval('h1', element => element.innerText).catch(() => 'No H1 found')
@@ -59,6 +59,10 @@ export async function webScraping({ url }: { url: string }) {
   // console.log('Images:', images)
   // console.log('Links:', links)
   // console.log('Schema Markup JSON-LD:', schemaMarkup)
+  // console.log('OG title:', OGtitle)
+  // console.log('OG description:', OGdescription)
+  // console.log('OG image:', OGimage)
+  // console.log('OG url:', OGurl)
   // console.log('-----------------------')
 
   await browser.close()
@@ -71,8 +75,6 @@ export async function webScraping({ url }: { url: string }) {
   if (!title) score -= 5
 
   if (titleLength > 80 || titleLength < 55) score -= 3
-
-  console.log({ titleLength, descriptionLength })
 
   if (titles.length > 1) score -= 3
 
@@ -107,9 +109,21 @@ export async function webScraping({ url }: { url: string }) {
 
   if (!schemaMarkup) score -= 5
 
-  console.log('Score:', score)
+  interface Issue {
+    key: string
+    issue: boolean
+    detail:
+      | string
+      | { src: string; alt: string }[]
+      | {
+          href: string
+          text: string
+        }[]
+      | (string | null)[]
+    count?: number
+  }
 
-  const issues = [
+  const issues: Issue[] = [
     {
       key: 'title',
       issue: !title,
