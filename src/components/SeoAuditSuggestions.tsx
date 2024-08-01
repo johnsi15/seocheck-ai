@@ -4,47 +4,11 @@ import { useChat } from 'ai/react'
 import { Loading } from './Loading'
 import { useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
-
-type ImageData = {
-  src: string
-  alt: string
-}
-
-type LinkData = {
-  href: string
-  text: string
-}
-
-interface ScrapedData {
-  title: string
-  description: string
-  h1: string
-  h2: string
-  images: ImageData[]
-  links: LinkData[]
-  schemaMarkup: (string | null)[]
-  OGtitle: string
-  OGdescription: string
-  OGimage: string
-  OGurl: string
-}
-
-interface Issue {
-  key: string
-  issue: boolean
-  detail:
-    | string
-    | { src: string; alt: string }[]
-    | {
-        href: string
-        text: string
-      }[]
-    | (string | null)[]
-  count?: number
-}
+import { type Issue, ScrapedData } from '@/types'
 
 export function SeoAuditSuggestions({ scrapedData, issues }: { scrapedData: ScrapedData; issues: Issue[] }) {
   const searchParams = useSearchParams()
+
   const { messages, append, isLoading, error, reload } = useChat({
     api: '/api/seo-audit-suggestions',
     keepLastMessageOnError: true,
@@ -72,20 +36,20 @@ export function SeoAuditSuggestions({ scrapedData, issues }: { scrapedData: Scra
 
   return (
     <>
-      {!error && (
-        <div className='mt-5'>
-          <ul className='flex flex-col gap-4 w-full'>
+      {!error && messages.length > 0 && (
+        <div className='mt-5 w-full'>
+          <ul className='flex flex-col gap-4 md:w-[700px] min-h-[100px] overflow-hidden'>
             {suggestionsList.map((suggestion, index) => {
               const [title, detail] = suggestion.split('::')
 
               if (!detail) return
 
               return (
-                <li key={index} className='min-h-min w-full'>
+                <li key={index} className='min-h-[100px] inline-block'>
                   <span className='text-xl mb-2 inline-block font-semibold dark:text-rose-600 text-rose-700'>
                     {title}
                   </span>
-                  <div className='mt-1 flex rounded-md shadow-sm px-4 py-2  whitespace-pre-line border border-red-600 bg-white dark:bg-transparent'>
+                  <div className='min-h-[100px] mt-1 rounded-md shadow-sm px-4 pt-2 pb-4 whitespace-pre-line border border-red-600 bg-white dark:bg-transparent'>
                     {detail}
                   </div>
                 </li>
