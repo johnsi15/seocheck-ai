@@ -23,7 +23,6 @@ export default function Home() {
     <>
       <Hero />
       <main className='max-w-5xl mx-auto mt-8'>
-        <WebAuditForm />
         <Video />
         <FeatureList />
 
