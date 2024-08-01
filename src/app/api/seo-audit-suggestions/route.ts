@@ -10,7 +10,44 @@ if (!process.env.OPENAI_API_KEY) {
 const defaultMessages: CoreMessage[] = [
   {
     role: 'system',
-    content: `Como un asistente útil que proporciona sugerencias de SEO, tu objetivo es analizar y dar sugerencias de todos los datos que te pasen SOLO vas a dar sugerencias donde veas fallas o que algo puede ser mejor y en especial campos que no se encuentren como title, description, alt of images, tag h1, links internos, Schema Markup JSON-LD. Debes optimizar todos esos datos para mejorar el ranking en los resultados de búsqueda, revisar palabras claves que en los campos titles y description se encuentre que exista una coherencia con los textos. 
+    content: `Como un asistente útil que proporciona sugerencias de SEO, tu objetivo es analizar los datos proporcionados y sugerir mejoras solo donde sea necesario. Tu enfoque principal debe ser mejorar el ranking en los resultados de búsqueda mediante la optimización de los siguientes elementos: title, description, alt de imágenes, h1, internal links, Schema Markup JSON-LD, h2 si hace falta.
+    
+    Instrucciones:
+    - Solo proporcionarás sugerencias si detectas fallas o áreas de mejora.
+    - Deberás asegurarte de que exista coherencia entre los campos title y description y los textos proporcionados.
+    - Utiliza el siguiente formato para las sugerencias:
+    - Usa *** para separar los distintos análisis y sugerencias.
+    - Cada sugerencia debe contener una breve descripción del problema y una solución concreta.
+
+    Criterios de Análisis:
+    - Title:
+      - Falta la etiqueta <title>: Sugiere agregar una etiqueta <title> relevante.
+      - Título largo o corto: Si el título es demasiado largo o corto, sugiere un ajuste con un ejemplo.
+    - Description:
+      - Falta la etiqueta <meta name="description">: Sugiere agregar una descripción adecuada.
+      - Descripción larga o corta: Si la descripción no está dentro del rango ideal (120-160 caracteres), sugiere un ajuste.
+    - H1:
+      - Inadecuado o inexistente: Si el H1 no es adecuado, sugiere una alternativa que mejore el SEO.
+    - Alt en imágenes:
+      - Falta de atributos alt: Sugiere agregar alt descripciones relevantes para cada imagen.
+    - Enlaces internos:
+      - Enlaces sin texto o sin optimizar: Sugiere mejoras para los textos de los enlaces o la estructura de los mismos, y si no existen sugiere agregar alguno.
+    - Schema Markup JSON-LD:
+      - Campos vacíos o incorrectos: Sugiere correcciones específicas.
+
+    Formato de salida deseado:
+    Título::
+    - Problema: Descripción del problema.\n
+    - Sugerencia: Solución propuesta con un ejemplo.\n
+    ***
+    Descripción:
+    - Problema: Descripción del problema.\n
+    - Sugerencia: Solución propuesta con un ejemplo.\n
+    ***
+    H1::
+    - Problema: Descripción del problema.\n
+    - Sugerencia: Solución propuesta con un ejemplo.\n
+    ***
 
     Tener en cuenta estos valores:
     valores = title: {
@@ -67,8 +104,6 @@ const defaultMessages: CoreMessage[] = [
       description: 'El marcado de esquema no es adecuado para la página.',
       solution: 'Ajusta el marcado de esquema para mejorar la accesibilidad.',
     }
-
-    Por cada item analizado dame un ejemplo como sugerencia.
     `,
   },
   {
@@ -259,9 +294,8 @@ const defaultMessages: CoreMessage[] = [
 
 export async function auditSuggestions({ messages }: { messages: CoreMessage[] }) {
   const result = await streamText({
-    model: openai('gpt-3.5-turbo'),
+    model: openai('gpt-4o-mini'),
     messages: [...defaultMessages, ...messages],
-    temperature: 0.75,
   })
 
   return { result }
