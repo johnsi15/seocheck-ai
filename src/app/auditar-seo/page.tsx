@@ -2,6 +2,7 @@ import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
 import { InvalidWebAudit } from '@/components/InvalidWebAudit'
 import { ScrollToTop } from '@/components/ScrollToTop'
+import { SeoAuditSuggestions } from '@/components/SeoAuditSuggestions'
 import { WebAuditForm } from '@/components/WebAuditForm'
 import { webScraping } from '@/lib/scrapingPly'
 
@@ -16,7 +17,7 @@ export default async function AuditSeo({
     return <InvalidWebAudit />
   }
 
-  const { score, issues } = await webScraping({ url })
+  const { score, issues, data } = await webScraping({ url })
 
   type IssueDetail = {
     value: string
@@ -256,6 +257,13 @@ export default async function AuditSeo({
             })}
           </ul>
         </div>
+
+        <section className='my-12'>
+          <h3 className='text-4xl'>
+            Sugerencias generadas con <strong className='bg-rose-500 px-2 py-1 leading-tight rounded-sm'>IA</strong>
+          </h3>
+          <SeoAuditSuggestions scrapedData={data} issues={issues} />
+        </section>
 
         <footer className='w-full mt-20'>
           <h3 className='text-4xl my-4 text-center'>Auditar otro sitio web</h3>

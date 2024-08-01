@@ -19,8 +19,6 @@ export function Suggestions({ data }: Props) {
   if (lastAssistantMessage?.content && lastAssistantMessage.content.length > 0) {
     const suggestionsList = lastAssistantMessage.content.split('<break />')
 
-    console.log({ suggestionsList })
-
     return (
       <section
         id='suggestions'
