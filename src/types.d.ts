@@ -41,7 +41,7 @@ export interface ScrapedData {
   h2: string
   images: ImageData[]
   links: LinkData[]
-  schemaMarkup: (string | null)[]
+  schemaMarkup: string | (string | null)[]
   OGtitle: string
   OGdescription: string
   OGimage: string
