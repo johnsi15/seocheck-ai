@@ -1,5 +1,3 @@
-// import { chromium } from 'playwright'
-
 import { ScrapedData, Issue } from '@/types'
 interface ScrapingData {
   score: number
@@ -34,23 +32,23 @@ export async function webScraping({ url }: { url: string }) {
     }
   } catch (error) {
     console.log('This is error: ' + error)
+  }
 
-    return {
-      score: 0,
-      issues: [],
-      data: {
-        title: '',
-        description: '',
-        h1: '',
-        h2: '',
-        images: [],
-        links: [],
-        schemaMarkup: '',
-        OGtitle: '',
-        OGdescription: '',
-        OGimage: '',
-        OGurl: '',
-      },
-    }
+  return {
+    score: 0,
+    issues: [],
+    data: {
+      title: '',
+      description: '',
+      h1: '',
+      h2: '',
+      images: [],
+      links: [],
+      schemaMarkup: '',
+      OGtitle: '',
+      OGdescription: '',
+      OGimage: '',
+      OGurl: '',
+    },
   }
 }
