@@ -116,7 +116,6 @@ export function FormSeoCheck() {
               id='title'
               type='text'
               placeholder='Título'
-              defaultValue='Cúcuta tendrá gran desfile en conmemoración al Día de la Independencia de Colombia'
               className={`w-full pl-5 pr-3 py-2 outline-none border shadow-sm rounded-lg ${
                 errors.title
                   ? 'bg-red-50 border-red-500 text-red-800 focus:border-red:500 dark:bg-red-100'
@@ -143,7 +142,6 @@ export function FormSeoCheck() {
               id='description'
               rows={3}
               placeholder='Descripción'
-              defaultValue='El desfile iniciará en el Puente Benito Hernández y se hará un ensayo previo al evento en los próximos días.'
               className={`w-full pl-5 pr-3 py-2   outline-none border  shadow-sm rounded-lg resize-none ${
                 errors.description
                   ? 'bg-red-50 border-red-500 text-red-800 focus:border-red:500 dark:bg-red-100'
