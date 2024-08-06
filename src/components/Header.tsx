@@ -24,6 +24,16 @@ export function Header() {
           </a>
         </div>
         <ul className={`md:flex-1 flex md:mt-0 items-center justify-end gap-1`}>
+          <li className='hidden md:block'>
+            <a href='/auditar-seo' className='hover:underline me-4 md:me-6'>
+              Analizar web
+            </a>
+          </li>
+          <li className='hidden md:block'>
+            <a href='/validar-seo-manual' className='hover:underline me-4 md:me-6'>
+              Validar SEO
+            </a>
+          </li>
           <li className='md:pb-0 bg-slate-400 dark:bg-slate-200 rounded hover:opacity-90'>
             <a
               href='https://www.buymeacoffee.com/jandrey15'

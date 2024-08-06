@@ -8,25 +8,31 @@ export function Footer() {
           <a href='/' className='flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse'>
             <img src='/logo-seocheckai.webp' alt='Home seocheckai' />
           </a>
-          <ul className='flex flex-wrap items-center mb-6 text-sm font-medium text-slate-200 sm:mb-0 dark:text-gray-300'>
+          <ul className='flex gap-x-5 gap-y-2 md:gap-5 flex-wrap items-center mb-6 text-sm font-medium text-slate-200 sm:mb-0 dark:text-gray-300'>
             <li>
               <a
                 href='https://link.mercadopago.com.co/johnserrano'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='hover:underline me-4 md:me-6'
+                className='hover:underline'
               >
                 Donar
               </a>
             </li>
             <li>
-              <a href='/auditar-seo' className='hover:underline me-4 md:me-6'>
+              <a href='/auditar-seo' className='hover:underline'>
                 Analizar web
               </a>
             </li>
             <li>
-              <a href='/validar-seo-manual' className='hover:underline me-4 md:me-6'>
+              <a href='/validar-seo-manual' className='hover:underline'>
                 Validar SEO
+              </a>
+            </li>
+
+            <li>
+              <a href='mailto:me@johnserrano.co' target='_blank' rel='noopener noreferrer' className='hover:underline'>
+                Contacto
               </a>
             </li>
             <li>
@@ -34,14 +40,9 @@ export function Footer() {
                 href='https://www.buymeacoffee.com/jandrey15'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='hover:underline me-4 md:me-6'
+                className='hover:underline'
               >
                 Cómprame un cáfe
-              </a>
-            </li>
-            <li>
-              <a href='mailto:me@johnserrano.co' target='_blank' rel='noopener noreferrer' className='hover:underline'>
-                Contacto
               </a>
             </li>
           </ul>
