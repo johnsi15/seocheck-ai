@@ -39,7 +39,7 @@ export function Header() {
           <li className='md:pb-0 hover:opacity-75 w-10 h-10 flex justify-center items-center focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg'>
             <a
               className='p-2'
-              href='https://github.com/johnsi15'
+              href='https://github.com/johnsi15/seocheck-ai'
               aria-label='GitHub Link'
               target='_blank'
               rel='noopener noreferrer'
