@@ -18,7 +18,7 @@ const plyrProps: PlyrProps = {
     title: 'seocheckai ejemplo validar el SEO de tu título y descripción',
     sources: [
       {
-        src: 'https://res.cloudinary.com/john-serrano/video/upload/v1706029556/seocheckai/video/seocheckai_preview_fh2gpn.mp4',
+        src: 'https://download.johnserrano.co/seocheckai.mp4',
         type: 'video/mp4',
         size: 1920,
       },
