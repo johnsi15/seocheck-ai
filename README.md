@@ -11,13 +11,24 @@
 
 [Seocheckai](https://seocheckai.com/) es una aplicación web que te ayuda a identificar problemas de SEO en tus sitios web. Y por si fuera poco, también genera sugerencias para resolver esos problemas utilizando inteligencia artificial con uno de los modelos de OpenAI.
 
--- video
+
+<div align="center">
+  <div align="center">
+    <a href="https://seocheckai.com/">
+      <img
+      src="https://github.com/user-attachments/assets/91836e5b-c490-4983-b338-ff748a32d9b8"
+      alt="seocheckai"/>
+    </a>
+
+     
+  </div>
 
 ![Next.js Badge](https://img.shields.io/badge/Next.js&nbsp;14-000?logo=nextdotjs&logoColor=fff&style=flat)
 ![OpenAI](https://img.shields.io/badge/OpenAI-blue?logo=openai&logoColor=white&labelColor=gray)
 ![GitHub stars](https://img.shields.io/github/stars/johnsi15/seocheck-ai)
 ![GitHub releases](https://img.shields.io/github/release/johnsi15/seocheck-ai)
 ![GitHub issues](https://img.shields.io/github/issues/johnsi15/seocheck-ai)
+</div>
 
 ## Tecnologías utilizadas
 
