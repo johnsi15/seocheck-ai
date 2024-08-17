@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://slug.vercel.app">
+  <a href="https://seocheckai.com">
     <img
       src="https://seocheckai.com/logo-seocheckai.webp"
       alt="seocheckai"
