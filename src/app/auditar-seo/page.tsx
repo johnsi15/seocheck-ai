@@ -146,7 +146,7 @@ export default async function AuditSeo({
                     {issueDescriptionData[key].value}
                   </h3>
                   {key === 'titles' && Array.isArray(detail) && (
-                    <div className='mt-1 flex flex-col rounded-md shadow-sm px-2 py-2 break-all max-h-28 overflow-scroll whitespace-pre-line border border-red-600 dark:bg-white dark:bg-transparent'>
+                    <div className='mt-1 flex flex-col rounded-md shadow-sm px-2 py-2 break-all max-h-28 overflow-scroll whitespace-pre-line border border-red-600 bg-white dark:bg-transparent'>
                       {detail.map((item, index) => (
                         <div key={index}>{String(item)}</div>
                       ))}
