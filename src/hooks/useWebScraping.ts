@@ -11,18 +11,33 @@ interface ScrapingData {
 
 export function useWebScraping({ url, apiUrl }: { url: string; apiUrl: string }) {
   console.log({ urlWebScrping: url })
-  const API_URL = apiUrl
 
-  const [data, setData] = useState<ScrapingData | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(false)
+  const [scrapingData, setScrapingData] = useState<ScrapingData>({
+    score: 0,
+    issues: [],
+    data: {
+      title: '',
+      description: '',
+      h1: '',
+      h2: '',
+      images: [],
+      links: [],
+      schemaMarkup: '',
+      OGtitle: '',
+      OGdescription: '',
+      OGimage: '',
+      OGurl: '',
+    },
+    error: false,
+    loading: true,
+  })
 
   useEffect(() => {
     const getData = async () => {
-      setLoading(true)
+      setScrapingData(prev => ({ ...prev, loading: true, error: false }))
 
       try {
-        const res = await fetch(API_URL, {
+        const res = await fetch(apiUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -30,8 +45,10 @@ export function useWebScraping({ url, apiUrl }: { url: string; apiUrl: string })
           body: JSON.stringify({ url }),
         })
 
+        console.log({ res })
+
         if (!res.ok) {
-          setError(true)
+          setScrapingData(prev => ({ ...prev, loading: false, error: true }))
           throw new Error('Error in the request API scraping')
         }
 
@@ -39,37 +56,21 @@ export function useWebScraping({ url, apiUrl }: { url: string; apiUrl: string })
 
         const { score, issues, data }: ScrapingData = result.data
 
-        setData({ score, issues, data, loading, error })
+        setScrapingData({
+          score,
+          issues,
+          data,
+          loading: false,
+          error: false,
+        })
       } catch (error) {
         console.log('This is error: ' + error)
-        setError(true)
-      } finally {
-        setLoading(false)
+        setScrapingData(prev => ({ ...prev, loading: false, error: true }))
       }
     }
 
     getData()
-  }, [url, loading, error])
+  }, [url, apiUrl])
 
-  return (
-    data || {
-      score: 0,
-      issues: [],
-      data: {
-        title: '',
-        description: '',
-        h1: '',
-        h2: '',
-        images: [],
-        links: [],
-        schemaMarkup: '',
-        OGtitle: '',
-        OGdescription: '',
-        OGimage: '',
-        OGurl: '',
-      },
-      error: false,
-      loading: true,
-    }
-  )
+  return scrapingData
 }
