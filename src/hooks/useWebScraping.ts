@@ -10,8 +10,6 @@ interface ScrapingData {
 }
 
 export function useWebScraping({ url, apiUrl }: { url: string; apiUrl: string }) {
-  console.log({ urlWebScrping: url })
-
   const [scrapingData, setScrapingData] = useState<ScrapingData>({
     score: 0,
     issues: [],
@@ -44,8 +42,6 @@ export function useWebScraping({ url, apiUrl }: { url: string; apiUrl: string })
           },
           body: JSON.stringify({ url }),
         })
-
-        console.log({ res })
 
         if (!res.ok) {
           setScrapingData(prev => ({ ...prev, loading: false, error: true }))

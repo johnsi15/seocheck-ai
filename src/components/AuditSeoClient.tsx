@@ -4,14 +4,20 @@ import { SeoAuditSuggestions } from '@/components/SeoAuditSuggestions'
 import { WebAuditForm } from '@/components/WebAuditForm'
 import { useWebScraping } from '@/hooks/useWebScraping'
 import { issuesDescription } from '@/lib/consts'
+import { SpinnerInfinity } from '@/components/Spinner'
 
 export function AuditSeoClient({ url, apiUrl }: { url: string; apiUrl: string }) {
   const { score, issues, data, loading, error } = useWebScraping({ url, apiUrl })
 
-  console.log({ score, loading, error })
-
   if (loading) {
-    return <div>Cargando...</div>
+    return (
+      <div className='flex flex-col items-center pt-16 pb-10 px-4 md:px-0 w-full md:m-auto md:w-[700px]'>
+        <h1 className='text-4xl dark:text-slate-200 mb-10 text-center'>
+          Auditando el <span className='dark:text-rose-600 text-rose-700'>SEO</span> de tu sitio web...
+        </h1>
+        <SpinnerInfinity />
+      </div>
+    )
   }
 
   const issueDescriptionData = issuesDescription(issues)
@@ -30,7 +36,8 @@ export function AuditSeoClient({ url, apiUrl }: { url: string; apiUrl: string })
   return (
     <main className='flex flex-col items-center pt-16 pb-10 px-4 md:px-0 w-full md:m-auto md:w-[700px]'>
       <h1 className='text-4xl dark:text-slate-200 mb-10 text-center'>
-        Audita el <span className='dark:text-rose-600 text-rose-700'>SEO</span> de tu sitio web 🔥
+        Estos son los resultados de la auditoría de <span className='dark:text-rose-600 text-rose-700'>SEO</span> de tu
+        sitio web 🔥
       </h1>
 
       <header className='flex items-center flex-col max-w-72'>

@@ -13,8 +13,6 @@ export default async function AuditSeo({
 
   const validUrl = typeof url === 'string' && url.startsWith('https://') ? url : ''
 
-  console.log({ validUrl })
-
   if (!validUrl) {
     return <InvalidWebAudit message='Obtén un análisis completo del SEO de tu sitio web' />
   }
