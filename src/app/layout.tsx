@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='es'>
-      <body className={`${lato.className} bg-slate-100 dark:bg-slate-900 flex flex-col min-h-dvh`}>
+      <body className={`${lato.className} bg-slate-100 dark:bg-slate-900 flex flex-col min-h-dvh justify-between`}>
         <ThemeProviders attribute='class' storageKey='theme' defaultTheme='system' enableSystem>
           {children}
         </ThemeProviders>
