@@ -15,7 +15,7 @@ const config: Config = {
       bold: '900',
     },
   },
-  plugins: [],
+  plugins: [require('tailwindcss-animate')],
   darkMode: 'class',
 }
 export default config
