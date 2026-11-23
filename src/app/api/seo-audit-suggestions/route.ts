@@ -291,7 +291,7 @@ const defaultMessages: CoreMessage[] = [
 ]
 
 export async function POST(req: Request) {
-  const message = await prepareSuggestion(req, 'audit')
+  const message = await prepareSuggestion(req)
   if (message instanceof Response) return message
 
   const result = await streamText({

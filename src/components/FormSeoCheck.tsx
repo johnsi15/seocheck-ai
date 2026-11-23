@@ -3,34 +3,19 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useLogger } from 'next-axiom'
 import { SeoCheck, seoCheckSchema } from '@/lib/types'
-import { suggestionChatOptions, suggestionErrorMessage } from '@/lib/suggestion-chat'
 import { ErrorsMessage, ErrorsSuccess } from './ErrorsSuccess'
-import { Suggestions } from './Suggestions'
-// import { useDataSeoAi } from '@/hooks/useDataSeoAi'
-import { Loading } from './Loading'
-import { useChat } from 'ai/react'
 
 export function FormSeoCheck() {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting, isValid, isSubmitSuccessful },
-    reset,
     getFieldState,
     setError,
     getValues,
   } = useForm<SeoCheck>({
     resolver: zodResolver(seoCheckSchema),
   })
-
-  // const { handleSuggestionsAI, suggestionsIa, errorAI, loading } = useDataSeoAi()
-  const { messages, append, isLoading, error, reload } = useChat({ api: '/api/chat', ...suggestionChatOptions })
-
-  const handleSuggestionsAI = () => {
-    console.log('handleSuggestionsAI')
-
-    append({ content: `Title: ${title}\nDescription: ${description}\nKeywords: ${keyword}`, role: 'user' })
-  }
 
   const log = useLogger()
 
@@ -73,7 +58,6 @@ export function FormSeoCheck() {
         type: 'manual',
         message: 'El descripción NO debe incluir más 10 números consecutivos.',
       })
-    // reset()
     log.info('Validated and correct SEO', data)
     return
   }
@@ -83,31 +67,8 @@ export function FormSeoCheck() {
 
   const title = getValues('title')
   const description = getValues('description')
-  const keyword = getValues('keyword')
-
-  const validButtonAI = !title || !description || isSubmitting || title.length < 30 || description.length < 60
-
   return (
     <>
-      {!error && messages.length > 0 && <Suggestions data={messages} />}
-
-      <p aria-live='polite' className='text-lg dark:text-slate-200 text-pretty md:w-[700px]'>
-        {error ? suggestionErrorMessage(error) : ''}
-      </p>
-      {error && (
-        <div className='mb-5 flex flex-col items-center justify-center gap-4'>
-          <button
-            type='button'
-            className='relative inline-flex items-center justify-center px-2 py-3 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-rose-700 to-rose-700 group-hover:from-rose-700 group-hover:to-rose-700 hover:text-slate-200 dark:text-slate-200 focus:ring-2 focus:outline-none'
-            onClick={() => reload()}
-          >
-            Intentar de nuevo
-          </button>
-        </div>
-      )}
-
-      {isLoading && <Loading />}
-
       <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5 w-full md:w-[700px]'>
         <label htmlFor='title' className='flex flex-col'>
           <span className='mb-2 text-lg text-slate-800 dark:text-slate-200 font-semibold text-balance'>
@@ -178,22 +139,13 @@ export function FormSeoCheck() {
           />
         </label>
 
-        <div className='flex gap-3'>
+        <div>
           <button
-            disabled={isSubmitting || error != null}
+            disabled={isSubmitting}
             type='submit'
             className='h-full px-3 py-2 md:px-6 md:py-3.5  rounded-lg duration-150 bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 active:shadow-lg md:w-[150px] disabled:opacity-75 disabled:cursor-not-allowed disabled:bg-rose-700'
           >
             Validar SEO
-          </button>
-
-          <button
-            disabled={validButtonAI || isSubmitting || error != null || isLoading}
-            type='button'
-            onClick={handleSuggestionsAI}
-            className='h-full px-3 py-2 md:px-6 md:py-3.5  rounded-lg duration-150 bg-rose-700 text-white dark:text-slate-200 dark:bg-rose-600 dark:hover:bg-rose-700 hover:bg-rose-600 active:shadow-lg md:w-2/5 disabled:opacity-75 disabled:cursor-not-allowed disabled:bg-rose-700'
-          >
-            Generar sugerencias con AI
           </button>
         </div>
 
@@ -209,14 +161,6 @@ export function FormSeoCheck() {
               Siguiendo estas sugerencias, podemos mejorar la visibilidad y la efectividad de nuestro contenido en los
               motores de búsqueda.
             </p>
-            {validButtonAI && (
-              <p className='mt-3'>
-                Para recibir <strong className='dark:text-rose-600 text-rose-700'>sugerencias</strong> a través de
-                inteligencia artificial <strong className='dark:text-rose-600 text-rose-700'>(AI)</strong>, es necesario
-                que el título (con un mínimo de 30 caracteres) y la descripción (con un mínimo de 60 caracteres) cumplan
-                con estos requisitos establecidos.
-              </p>
-            )}
           </article>
         )}
         {isValid && isSubmitSuccessful && (

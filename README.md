@@ -68,25 +68,23 @@ Puedes contactarme si tienes dudas sobre el proyecto o cualquier otra cosa en la
 1. **¿Cómo puedo analizar un sitio web?**
   
   > Puedes analizar o auditar un sitio web desde la página principal o buscar la opción en la parte superior o inferior del sitio donde dice 'Analizar web'. Después, debes ingresar la **URL** del sitio web que deseas analizar.
-2. **¿Cómo puedo generar sugerencias de títulos y descripciones?**
+2. **¿Cómo puedo generar sugerencias con IA?**
    
-> Debes buscar la opción "Validar SEO", introducir un título y una descripción, y luego hacer clic en el botón "Validar SEO". Después de esto, se habilitará el botón "Generar sugerencias con AI". Al hacer clic en ese botón, podrás generar sugerencias.
+> Audita una URL y pulsa «Generar sugerencias con IA» en los resultados. La herramienta «Validar SEO» comprueba títulos y descripciones sin usar IA.
 
-3. **¿Cuál es el límite para analizar webs y generar sugerencias de títulos y descripciones?**
+3. **¿Cuál es el límite para generar sugerencias con IA?**
 
-> La auditoría básica no consume la cuota de IA. Las sugerencias se generan al pulsar el botón y comparten un límite de 5 solicitudes por IP cada 10 minutos y 100 solicitudes para toda la app por día UTC.
+> La auditoría básica no consume cuota de IA. Las sugerencias de la auditoría tienen un límite de 5 solicitudes por IP cada 10 minutos y 100 solicitudes para toda la app por día UTC.
 
 ## ☁️ Desplegado en Vercel
 
 - ✅ [seocheckai.com](https://seocheckai.com/).
 
-Antes de desplegar, configura `OPENAI_API_KEY`, `UPSTASH_REDIS_REST_URL` y `UPSTASH_REDIS_REST_TOKEN` en las variables de entorno de Vercel. Usa las credenciales REST de una base Upstash Redis. Si Redis no está configurado o deja de responder, las rutas de IA regresan `503` sin llamar a OpenAI; el resto del sitio sigue disponible. `npm run dev` permite probar sin Redis cuando se ejecuta fuera de Vercel.
+Antes de desplegar, configura `OPENAI_API_KEY`, `UPSTASH_REDIS_REST_URL` y `UPSTASH_REDIS_REST_TOKEN` en las variables de entorno de Vercel. Usa las credenciales REST de una base Upstash Redis. Si Redis no está configurado o deja de responder, la ruta de sugerencias de auditoría regresa `503` sin llamar a OpenAI; el resto del sitio sigue disponible. `npm run dev` permite probar sin Redis cuando se ejecuta fuera de Vercel.
 
 ## Tasks
 
-- [x] add limit suggestions with AI for title, max 3 fer title
 - [x] limit AI requests per IP and cap total daily requests
-- [x] unlock the button to generate suggestions even if the description does not comply with  the validation
 - [x] add button donar
 - [x] add icon github
 - [x] add icon buy coffee

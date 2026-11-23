@@ -5,12 +5,7 @@ import { Redis } from '@upstash/redis'
 import { z } from 'zod'
 
 const requestSchema = z.object({ messages: z.array(z.unknown()).min(1) })
-const suggestionLimits = {
-  chat: { bytes: 8 * 1024, characters: 2_000 },
-  audit: { bytes: 64 * 1024, characters: 24_000 },
-}
-
-type SuggestionKind = keyof typeof suggestionLimits
+const suggestionLimits = { bytes: 64 * 1024, characters: 24_000 }
 
 let limiters: { perIp: Ratelimit; daily: Ratelimit } | undefined
 
@@ -31,13 +26,13 @@ function getLimiters() {
   return limiters
 }
 
-async function readSuggestion(req: Request, kind: SuggestionKind) {
+async function readSuggestion(req: Request) {
   const contentType = req.headers.get('content-type')?.split(';')[0].trim().toLowerCase()
   if (contentType !== 'application/json') {
     return Response.json({ error: 'Se esperaba application/json.' }, { status: 415 })
   }
 
-  const { bytes, characters } = suggestionLimits[kind]
+  const { bytes, characters } = suggestionLimits
   const tooLarge = () => Response.json({ error: 'La solicitud supera el tamaño permitido.' }, { status: 413 })
   if (Number(req.headers.get('content-length')) > bytes) return tooLarge()
 
@@ -77,8 +72,8 @@ async function readSuggestion(req: Request, kind: SuggestionKind) {
   }
 }
 
-export async function prepareSuggestion(req: Request, kind: SuggestionKind) {
-  const message = await readSuggestion(req, kind)
+export async function prepareSuggestion(req: Request) {
+  const message = await readSuggestion(req)
   if (message instanceof Response) return message
 
   const unavailable = () => Response.json({ error: 'Las sugerencias con IA no están disponibles.' }, { status: 503 })
