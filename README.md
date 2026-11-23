@@ -74,16 +74,18 @@ Puedes contactarme si tienes dudas sobre el proyecto o cualquier otra cosa en la
 
 3. **¿Cuál es el límite para analizar webs y generar sugerencias de títulos y descripciones?**
 
-> No existe un límite para analizar sitios web y generar sugerencias, pero por favor, no abuses del sistema.
+> La auditoría básica no consume la cuota de IA. Las sugerencias se generan al pulsar el botón y comparten un límite de 5 solicitudes por IP cada 10 minutos y 100 solicitudes para toda la app por día UTC.
 
 ## ☁️ Desplegado en Vercel
 
 - ✅ [seocheckai.com](https://seocheckai.com/).
 
+Antes de desplegar, configura `OPENAI_API_KEY`, `UPSTASH_REDIS_REST_URL` y `UPSTASH_REDIS_REST_TOKEN` en las variables de entorno de Vercel. Usa las credenciales REST de una base Upstash Redis. Si Redis no está configurado o deja de responder, las rutas de IA regresan `503` sin llamar a OpenAI; el resto del sitio sigue disponible. `npm run dev` permite probar sin Redis cuando se ejecuta fuera de Vercel.
+
 ## Tasks
 
 - [x] add limit suggestions with AI for title, max 3 fer title
-- [ ] add limit for IP max request (?) for day
+- [x] limit AI requests per IP and cap total daily requests
 - [x] unlock the button to generate suggestions even if the description does not comply with  the validation
 - [x] add button donar
 - [x] add icon github

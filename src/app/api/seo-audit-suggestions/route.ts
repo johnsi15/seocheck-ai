@@ -1,11 +1,9 @@
 import { type CoreMessage, streamText } from 'ai'
 import { openai } from '@ai-sdk/openai'
+import { prepareSuggestion } from '@/lib/ai-suggestions'
 
-export const runtime = 'edge'
-
-if (!process.env.OPENAI_API_KEY) {
-  throw new Error('OPENAI_API_KEY environment variable is required.')
-}
+export const runtime = 'nodejs'
+export const maxDuration = 30
 
 const defaultMessages: CoreMessage[] = [
   {
@@ -292,19 +290,17 @@ const defaultMessages: CoreMessage[] = [
   },
 ]
 
-async function auditSuggestions({ messages }: { messages: CoreMessage[] }) {
+export async function POST(req: Request) {
+  const message = await prepareSuggestion(req, 'audit')
+  if (message instanceof Response) return message
+
   const result = await streamText({
     model: openai('gpt-4o-mini'),
-    messages: [...defaultMessages, ...messages],
+    messages: [...defaultMessages, message],
+    maxTokens: 1_200,
+    maxRetries: 0,
+    abortSignal: AbortSignal.any([req.signal, AbortSignal.timeout(25_000)]),
   })
-
-  return { result }
-}
-
-export async function POST(req: Request) {
-  const { messages }: { messages: CoreMessage[] } = await req.json()
-
-  const { result } = await auditSuggestions({ messages })
 
   return result.toAIStreamResponse()
 }

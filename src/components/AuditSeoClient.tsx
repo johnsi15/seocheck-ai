@@ -188,12 +188,14 @@ export function AuditSeoClient({ url, apiUrl }: { url: string; apiUrl: string })
         </ul>
       </div>
 
-      <section className='my-12'>
-        <h3 className='text-4xl'>
-          Sugerencias generadas con <strong className='bg-rose-500 px-2 py-1 leading-tight rounded-sm'>IA</strong>
-        </h3>
-        <SeoAuditSuggestions scrapedData={data} issues={issues} />
-      </section>
+      {!error && (
+        <section className='my-12'>
+          <h2 className='text-4xl'>
+            Sugerencias con <strong className='bg-rose-500 px-2 py-1 leading-tight rounded-sm'>IA</strong>
+          </h2>
+          <SeoAuditSuggestions key={url} scrapedData={data} issues={issues} />
+        </section>
+      )}
 
       <footer className='w-full mt-20'>
         <h3 className='text-4xl my-4 text-center'>Auditar otro sitio web</h3>

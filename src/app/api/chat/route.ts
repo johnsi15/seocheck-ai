@@ -1,11 +1,9 @@
 import { CoreMessage, streamText } from 'ai'
 import { openai } from '@ai-sdk/openai'
+import { prepareSuggestion } from '@/lib/ai-suggestions'
 
-export const runtime = 'edge'
-
-if (!process.env.OPENAI_API_KEY) {
-  throw new Error('OPENAI_API_KEY environment variable is required.')
-}
+export const runtime = 'nodejs'
+export const maxDuration = 30
 
 const defaultMessages: CoreMessage[] = [
   {
@@ -28,29 +26,18 @@ const defaultMessages: CoreMessage[] = [
   },
 ]
 
-async function suggestions({ messages }: { messages: CoreMessage[] }) {
+export async function POST(req: Request) {
+  const message = await prepareSuggestion(req, 'chat')
+  if (message instanceof Response) return message
+
   const result = await streamText({
     model: openai('gpt-3.5-turbo'),
-    messages: [...defaultMessages, ...messages],
+    messages: [...defaultMessages, message],
+    maxTokens: 600,
+    maxRetries: 0,
+    abortSignal: AbortSignal.any([req.signal, AbortSignal.timeout(25_000)]),
     temperature: 0.75,
   })
 
-  return result
-}
-
-export async function GET() {
-  const data = {
-    name: 'John Serrano',
-    title: 'OpenAI',
-  }
-
-  return Response.json({ data, status: 200 })
-}
-
-export async function POST(req: Request) {
-  const { messages }: { messages: CoreMessage[] } = await req.json()
-
-  const messageSuggestions = await suggestions({ messages })
-
-  return messageSuggestions.toAIStreamResponse()
+  return result.toAIStreamResponse()
 }
